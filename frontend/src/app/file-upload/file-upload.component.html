@@ -1,0 +1,25 @@
+<input type="file" (change)="onFileSelected($event)" multiple>
+<button (click)="onUpload()">Upload</button>
+<div id="imageContainer"></div>
+@if (detectionResults.length){
+<table>
+  <thead>
+  <tr>
+    <th>Label</th>
+    <th>Confidence</th>
+  </tr>
+  </thead>
+  <tbody>
+  @for(item of detectionResults[0].objects;track $index){
+  <tr>
+    
+    <td>{{ item.label }}</td>
+    <td>{{ item.confidence }}</td>
+    <!--<td>{{ item.results[0].label }}</td>
+    <td>{{ item.results[0].confidence }}</td>-->
+ 
+  </tr>
+}
+  </tbody>
+</table>
+}

@@ -1,0 +1,20 @@
+/* header.component.css */
+header {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  color: var(--color-accent);
+}
+
+p {
+  font-size: 16px;
+  color: var(--color-secondary);
+}
