@@ -1,0 +1,15 @@
+.project-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    height: 70vh; /* Ajusta según tu diseño */
+    overflow-y: auto;
+  }
+  
+  .project {
+    background-color: #f3f3f3;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+  }

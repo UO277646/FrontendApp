@@ -1,20 +1,58 @@
-/* header.component.css */
+/* Estilos del header */
 header {
-  background-color: var(--color-primary);
-  color: white;
+  background-color: #333;
   padding: 20px;
+  color: white;
 }
 
-.title {
-  text-align: center;
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-h1 {
-  font-size: 24px;
-  color: var(--color-accent);
+/* Estilos del título y subtítulo */
+.title-section {
+  max-width: 60%;
 }
 
-p {
-  font-size: 16px;
-  color: var(--color-secondary);
+.main-title {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-top: 5px;
+}
+
+/* Estilos de la barra de navegación */
+.navbar {
+  display: flex;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  margin-left: 20px;
+}
+
+.nav-item a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.nav-item a:hover {
+  text-decoration: underline;
+}
+
+.active {
+  font-weight: bold;
 }
