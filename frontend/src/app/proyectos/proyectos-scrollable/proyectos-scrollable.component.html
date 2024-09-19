@@ -26,9 +26,9 @@
       <div class="modal-content">
         <span class="close" (click)="closeModal()">&times;</span>
         <h2>Crear nuevo proyecto</h2>
-        <form>
+        <form [formGroup]="fb">
           <label for="projectName">Nombre del proyecto:</label>
-          <input type="text" id="projectName" placeholder="Introduce el nombre del proyecto" required />
+          <input type="text" formControlName="nombre" id="projectName" placeholder="Introduce el nombre del proyecto" required />
           <button type="submit" (click)="create()">Crear</button>
         </form>
       </div>

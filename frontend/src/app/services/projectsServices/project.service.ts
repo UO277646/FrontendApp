@@ -19,8 +19,8 @@ export class ProjectService {
   }
 
   public createProject=async(nombreParam:any)=> {
-    const objeto={nombre:nombreParam,idProyecto:null,fechaCreacion:null};
-    const response=await firstValueFrom(this.http.post(this.apiUrl+"/create",objeto))
+    
+    const response=await firstValueFrom(this.http.post(this.apiUrl+"/create",nombreParam))
     return response;
   }
   
