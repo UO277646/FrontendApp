@@ -1,8 +1,35 @@
 <div class="project-container">
-@for (proyecto of proyectos $index){
-      <h3>{{ proyecto.nombre }}</h3>
-      <p>{{ proyecto.descripcion }}</p>
-      <!-- Aquí puedes agregar más detalles de cada proyecto -->
-    
+      <button (click)="showModal()" >Nuevo proyecto</button>
+<table>
+<tr>
+      <th>
+            Nombre
+      </th>
+      <th>
+            Fecha
+      </th>
+      <th>
+            Detalles
+      </th>
+
+</tr>
+@for (proyecto of proyectos ;track $index){
+      <tr>
+            <td>{{ proyecto.nombre }}</td>
+            <td>{{ proyecto.fechaCreacion }}</td>
+            <td><button>Detalles</button></td>
+      </tr> 
 }
+</table>
 </div>
+<div id="createProyModal" class="modal">
+      <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h2>Crear nuevo proyecto</h2>
+        <form>
+          <label for="projectName">Nombre del proyecto:</label>
+          <input type="text" id="projectName" placeholder="Introduce el nombre del proyecto" required />
+          <button type="submit" (click)="create()">Crear</button>
+        </form>
+      </div>
+    </div>

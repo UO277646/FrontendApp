@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  title = 'Detención de objetos con ONNX';
-  subtitle = 'Aplicación de detección de objetos utilizando ONNX';
+  title = 'Build Vision';
+  subtitle = 'Detección de objetos en obras de construcción para una mayor eficiencia';
 }

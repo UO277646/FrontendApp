@@ -20,4 +20,24 @@ export class ProyectosScrollableComponent {
       console.error('Error al obtener los proyectos:', error);
     }
   }
+  showModal(){
+    const modal = document.getElementById("createProyModal");
+    modal!.style.display = "block";
+  }
+  closeModal(){
+    const modal = document.getElementById("createProyModal");
+    modal!.style.display = "none";
+  }
+  create=async()=>{
+    const inputElement = document.getElementById("projectName") as HTMLInputElement;
+    const projectName = inputElement.value;  // Obtén el valor correctamente
+    const res=await this.projectService.createProject(projectName);
+    if(res){
+      const modal = document.getElementById("createProyModal");
+      modal!.style.display = "none";
+      this.proyectos =this.projectService.getProjects();
+    }
+  }
+
+
 }
