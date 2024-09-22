@@ -23,5 +23,14 @@ export class ProjectService {
     const response=await firstValueFrom(this.http.post(this.apiUrl+"/create",nombreParam))
     return response;
   }
+
+  public getDetecciones=async(idProyecto:any)=> {
+    const response=await firstValueFrom(this.http.get(this.apiUrl+"/find/detecciones/"+idProyecto))
+    return response;
+  }
+  public getRestricciones=async(idProyecto:any)=> {
+    const response=await firstValueFrom(this.http.get(this.apiUrl+"/find/restricciones/"+idProyecto))
+    return response;
+  }
   
 }

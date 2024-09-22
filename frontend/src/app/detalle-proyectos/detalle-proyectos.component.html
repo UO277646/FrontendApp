@@ -1,0 +1,50 @@
+    <h3>Detecciones del proyecto</h3>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Día</th>
+            <th>Número de Detecciones</th>
+            <th>Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+        @for (deteccion of detecciones ;track $index){
+            <tr>
+                <td>{{ deteccion.nombre }}</td>
+                <td>{{ deteccion.fechaCreacion }}</td>
+                <td>
+                <button>Detalles</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  
+    <h3>Restricciones del proyecto</h3>
+    
+    <div class="restrictions-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Restricción</th>
+              <th>Objeto con Restricción</th>
+              <th>Desde</th>
+              <th>Hasta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Reemplaza el bucle para restricciones -->
+            @for (restriccion of restricciones ;track $index){
+            <tr>
+                <td>{{ restriccion.idRestriccion }}</td>
+              <td>{{ restriccion.objetoRestriccion }}</td>
+              <td>{{ restriccion.desde }}</td>
+              <td>{{ restriccion.hasta }}</td>
+            </tr>
+        }
+          </tbody>
+        </table>
+      </div>
+  
