@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectService } from '../services/projectsServices/project.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormProjectService } from '../services/form/form-project.service';
+import { RestriccionService } from '../services/restricciones/restriccion.service';
 @Component({
   selector: 'app-detalle-proyectos',
   standalone: true,
@@ -11,11 +13,37 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './detalle-proyectos.component.css'
 })
 export class DetalleProyectosComponent {
+
+nuevaRestriccion() {
+throw new Error('Method not implemented.');
+}
+nuevaDeteccion() {
+throw new Error('Method not implemented.');
+}
     detecciones: any=[]
     restricciones: any=[]
     proyectoId: string | null = null;
-    constructor(private projectService: ProjectService,private route: ActivatedRoute) {
+    formService=inject(FormProjectService);
+
+    fb:FormGroup=this.formService.getRestrictionForm();
+
+    constructor(private projectService: ProjectService,private route: ActivatedRoute, private restriccionService: RestriccionService) {
     
+    }
+    showModal(){
+      const modal = document.getElementById("createRestriccionModal");
+      modal!.style.display = "block";
+    }
+    closeModal(){
+      const modal = document.getElementById("createRestriccionModal");
+      modal!.style.display = "none";
+    }
+    createRestriccion=async()=>{
+      const res=await this.restriccionService.createRestriccion(this.fb.value);
+      if(res){
+        const modal = document.getElementById("createRestriccionModal");
+        modal!.style.display = "none";
+      }
     }
     async ngOnInit() {
       try {

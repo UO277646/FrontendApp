@@ -25,16 +25,16 @@ input[type="file"] {
   margin: 0 auto;
   padding: 10px;
   width: 70%;
-  border: 2px dashed #C0C9CC; /* Cambio de color del borde */
+  border: 2px dashed #C0C9CC;
   border-radius: 5px;
-  background-color: #A39D92; /* Cambio de color de fondo */
-  color: #423e3c; /* Cambio de color del texto */
+  background-color: #A39D92;
+  color: #423e3c;
   text-align: center;
   cursor: pointer;
 }
 
 input[type="file"]:hover {
-  background-color: #C0C9CC; /* Cambio de color de fondo al pasar el ratón */
+  background-color: #C0C9CC;
 }
 
 input[type="file"]::before {
@@ -55,29 +55,98 @@ button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: #A39D92; /* Cambio de color de fondo del botón */
-  color: #636059; /* Cambio de color del texto del botón */
+  background-color: #A39D92;
+  color: #636059;
   font-size: 16px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #C0C9CC; /* Cambio de color de fondo al pasar el ratón */
+  background-color: #C0C9CC;
+}
+
+#imageContainer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.uploaded-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
 table {
-  width: 60%; /* Ajusta el ancho de la tabla al 60% de su contenedor */
-  margin: 20px auto; /* Centra la tabla horizontalmente y añade margen superior */
+  width: 60%;
+  margin: 20px auto;
   border-collapse: collapse;
 }
 
 th, td {
-  border: 1px solid #C0C9CC; /* Cambio de color del borde de la tabla */
+  border: 1px solid #C0C9CC;
   padding: 8px;
   text-align: left;
 }
 
 th {
-  background-color: #A39D92; /* Cambio de color de fondo del encabezado de la tabla */
-  color: #ffffff; /* Cambio de color del texto del encabezado de la tabla */
+  background-color: #A39D92;
+  color: #ffffff;
+}
+
+header {
+  background-color: #333;
+  padding: 20px;
+  color: white;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.title-section {
+  max-width: 60%;
+}
+
+.main-title {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-top: 5px;
+}
+
+.navbar {
+  display: flex;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  margin-left: 20px;
+}
+
+.nav-item a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.nav-item a:hover {
+  text-decoration: underline;
+}
+
+.active {
+  font-weight: bold;
 }

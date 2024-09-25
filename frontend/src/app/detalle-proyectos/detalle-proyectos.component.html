@@ -1,50 +1,71 @@
-    <h3>Detecciones del proyecto</h3>
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Día</th>
-            <th>Número de Detecciones</th>
-            <th>Detalles</th>
-          </tr>
-        </thead>
-        <tbody>
-        @for (deteccion of detecciones ;track $index){
-            <tr>
-                <td>{{ deteccion.fechaCreacion  }}</td>
-                <td>{{deteccion.cantidad }}</td>
-                <td>
-                <button>Detalles</button>
-                </td>
-            </tr>
-        }
-        </tbody>
-      </table>
-    </div>
-  
-    <h3>Restricciones del proyecto</h3>
-    
-    <div class="restrictions-container">
-        <table>
-          <thead>
-            <tr>
-              <th>ID Restricción</th>
-              <th>Objeto con Restricción</th>
-              <th>Desde</th>
-              <th>Hasta</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Reemplaza el bucle para restricciones -->
-            @for (restriccion of restricciones ;track $index){
-            <tr>
-                <td>{{ restriccion.idRestriccion }}</td>
-              <td>{{ restriccion.objetoRestriccion }}</td>
-              <td>{{ restriccion.desde }}</td>
-              <td>{{ restriccion.hasta }}</td>
-            </tr>
-        }
-          </tbody>
-        </table>
-      </div>
-  
+<h3>Detecciones del proyecto</h3>
+<div class="table-container">
+  <button (click)="nuevaDeteccion()">Realizar Nueva Detección</button>
+  <table>
+    <thead>
+      <tr>
+        <th>Día</th>
+        <th>Número de Detecciones</th>
+        <th>Detalles</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (deteccion of detecciones ;track $index){
+        <tr>
+          <td>{{ deteccion.fechaCreacion }}</td>
+          <td>{{ deteccion.cantidad }}</td>
+          <td>
+            <button>Detalles</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<h3>Restricciones del proyecto</h3>
+
+<div class="restrictions-container">
+  <button (click)="nuevaRestriccion()">Crear Nueva Restricción</button>
+  <table>
+    <thead>
+      <tr>
+        <th>ID Restricción</th>
+        <th>Objeto con Restricción</th>
+        <th>Desde</th>
+        <th>Hasta</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (restriccion of restricciones ;track $index){
+        <tr>
+          <td>{{ restriccion.idRestriccion }}</td>
+          <td>{{ restriccion.objetoRestriccion }}</td>
+          <td>{{ restriccion.desde }}</td>
+          <td>{{ restriccion.hasta }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+<div id="createRestriccionModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h2>Crear nueva restricción</h2>
+    <form [formGroup]="fb">
+      <label for="objeto">Objeto con restricción:</label>
+      <input type="text" formControlName="objeto" id="objeto" placeholder="Introduce el objeto" required />
+      
+      <label for="fechaDesde">Desde:</label>
+      <input type="date" formControlName="fechaDesde" id="fechaDesde" required />
+      
+      <label for="fechaHasta">Hasta:</label>
+      <input type="date" formControlName="fechaHasta" id="fechaHasta" required />
+      
+      <label for="cantidad">Cantidad:</label>
+      <input type="number" formControlName="cantidad" id="cantidad" placeholder="Introduce la cantidad" required />
+      
+      <button type="submit" (click)="createRestriccion()">Crear</button>
+    </form>
+  </div>
+</div>

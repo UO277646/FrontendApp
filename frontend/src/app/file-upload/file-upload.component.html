@@ -1,6 +1,11 @@
 <input type="file" (change)="onFileSelected($event)" multiple>
 <button (click)="onUpload()">Upload</button>
 <div id="imageContainer"></div>
+@if (url) {
+  <div id="imageContainer">
+    <img  src={{url}} alt="Imagen cargada" class="uploaded-image" />
+  </div>
+}
 @if (detectionResults.length){
 <table>
   <thead>

@@ -20,15 +20,28 @@ export class FileUploadComponent{
   detectionResults: any = [];
   foto:any;
   imgSrc:any;
+  message!: string;
+  imagePath: any;
+  url!: string | ArrayBuffer | null;
+
   constructor(private uploadService: UploadService) { }
   
   onFileSelected(event: any): void {
-    this.foto = event.target.files[0];
-    if (this.foto ) {
-      // Aquí podrías agregar lógica para manejar la imagen subida
-      console.log('Archivo seleccionado:', this.foto );
+    const files = event.target.files;
+    if (files.length === 0)
+        return;
 
-      // Puedes agregar lógica para enviar la imagen a un backend si es necesario
+    const mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+        this.message = "Only images are supported.";
+        return;
+    }
+
+    const reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+        this.url = reader.result; 
     }
   }
   onUpload=async()=>{
