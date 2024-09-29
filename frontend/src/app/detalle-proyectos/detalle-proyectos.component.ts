@@ -52,6 +52,10 @@ navigateToDetect() {
         console.error('Error al obtener los DATOS:', error);
       }
     }
+    navigateToDetection(fecha: any) {
+      const currentUrl = this.router.url;
+      this.router.navigate([`${currentUrl}/detections/${fecha}`]);
+    }
     load=async()=>{
       this.proyectoId = this.route.snapshot.paramMap.get('id');
       const res= await this.projectService.getDetecciones(this.proyectoId);
