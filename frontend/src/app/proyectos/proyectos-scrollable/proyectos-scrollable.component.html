@@ -17,7 +17,7 @@
       <tr>
             <td>{{ proyecto.nombre }}</td>
             <td>{{ proyecto.fechaCreacion }}</td>
-            <td><button>Detalles</button></td>
+            <td><button (click)="navigateToProject(proyecto.idProyecto)">Detalles</button></td>
       </tr> 
 }
 </table>

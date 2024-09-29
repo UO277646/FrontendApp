@@ -3,6 +3,7 @@ import { ProjectService } from '../../services/projectsServices/project.service'
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormProjectService } from '../../services/form/form-project.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-proyectos-scrollable',
@@ -12,11 +13,15 @@ import { CommonModule } from '@angular/common';
   styleUrl: './proyectos-scrollable.component.css'
 })
 export class ProyectosScrollableComponent {
+navigateToProject(idProyecto: number) {
+  const currentUrl = this.router.url;
+  this.router.navigate([`${currentUrl}/proyecto/${idProyecto}`]);
+}
   proyectos: any = [];
   formService=inject(FormProjectService);
 
   fb:FormGroup=this.formService.getProjectForm();
-  constructor(private projectService: ProjectService) {
+  constructor(private projectService: ProjectService,private router: Router) {
     
   }
   

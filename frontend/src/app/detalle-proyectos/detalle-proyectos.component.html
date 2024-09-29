@@ -1,6 +1,6 @@
 <h3>Detecciones del proyecto</h3>
 <div class="table-container">
-  <button (click)="nuevaDeteccion()">Realizar Nueva Detección</button>
+  <button (click)="navigateToDetect()">Realizar Nueva Detección</button>
   <table>
     <thead>
       <tr>
@@ -26,7 +26,7 @@
 <h3>Restricciones del proyecto</h3>
 
 <div class="restrictions-container">
-  <button (click)="nuevaRestriccion()">Crear Nueva Restricción</button>
+  <button (click)="showModal()">Crear Nueva Restricción</button>
   <table>
     <thead>
       <tr>
@@ -40,9 +40,9 @@
       @for (restriccion of restricciones ;track $index){
         <tr>
           <td>{{ restriccion.idRestriccion }}</td>
-          <td>{{ restriccion.objetoRestriccion }}</td>
-          <td>{{ restriccion.desde }}</td>
-          <td>{{ restriccion.hasta }}</td>
+          <td>{{ restriccion.objeto }}</td>
+          <td>{{ restriccion.fechaDesde }}</td>
+          <td>{{ restriccion.fechaHasta }}</td>
         </tr>
       }
     </tbody>

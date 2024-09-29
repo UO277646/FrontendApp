@@ -3,11 +3,18 @@ import { ProyectosPagComponent } from './proyectos/proyectos-pag/proyectos-pag.c
 import { NgModule } from '@angular/core';
 import { DetalleProyectosComponent } from './detalle-proyectos/detalle-proyectos.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { DetalleDeteccionComponent } from './detalle-deteccion/detalle-deteccion.component';
 
 export const routes: Routes = [
     {path:"",component:ProyectosPagComponent},
-    {path:"proyecto/:id",component:DetalleProyectosComponent},
-    {path:"detect",component:FileUploadComponent},
+    {path:"proyecto/:id",
+        children:[
+            {path:"",component:DetalleProyectosComponent},
+            {path:"detect",component:FileUploadComponent},
+            {path:"detections/:fecha",component:DetalleDeteccionComponent}
+        ]
+    },
+    //{path:"proyecto/:id/detect",component:FileUploadComponent},
     //{path:"detect",component:FileUploadComponent}
     //{path:"detect",component:ProyectosPagComponent}
 

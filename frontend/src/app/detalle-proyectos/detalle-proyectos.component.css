@@ -3,6 +3,8 @@
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px; /* Limitar el ancho máximo del contenedor */
+  margin: 20px auto; /* Centrar el contenedor horizontalmente */
 }
 
 .table-container, .restrictions-container {
@@ -58,6 +60,7 @@ h3 {
   margin-bottom: 15px;
   display: inline-block;
 }
+
 /* Estilos del modal */
 .modal {
   display: none;

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectService } from '../services/projectsServices/project.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormProjectService } from '../services/form/form-project.service';
 import { RestriccionService } from '../services/restricciones/restriccion.service';
 @Component({
@@ -13,13 +13,11 @@ import { RestriccionService } from '../services/restricciones/restriccion.servic
   styleUrl: './detalle-proyectos.component.css'
 })
 export class DetalleProyectosComponent {
+navigateToDetect() {
+  const currentUrl = this.router.url;
+  this.router.navigate([`${currentUrl}/detect`]);
+}
 
-nuevaRestriccion() {
-throw new Error('Method not implemented.');
-}
-nuevaDeteccion() {
-throw new Error('Method not implemented.');
-}
     detecciones: any=[]
     restricciones: any=[]
     proyectoId: string | null = null;
@@ -27,7 +25,7 @@ throw new Error('Method not implemented.');
 
     fb:FormGroup=this.formService.getRestrictionForm();
 
-    constructor(private projectService: ProjectService,private route: ActivatedRoute, private restriccionService: RestriccionService) {
+    constructor(private projectService: ProjectService,private route: ActivatedRoute, private restriccionService: RestriccionService,private router: Router) {
     
     }
     showModal(){
@@ -39,10 +37,12 @@ throw new Error('Method not implemented.');
       modal!.style.display = "none";
     }
     createRestriccion=async()=>{
+      this.fb.controls["idProyecto"].setValue(this.route.snapshot.paramMap.get('id'));
       const res=await this.restriccionService.createRestriccion(this.fb.value);
       if(res){
         const modal = document.getElementById("createRestriccionModal");
         modal!.style.display = "none";
+        this.load();
       }
     }
     async ngOnInit() {

@@ -10,7 +10,8 @@ export class FormProjectService {
       objeto: [""],
       fechaDesde: [null],
       fechaHasta: [null],
-      cantidad:0
+      cantidad:0,
+      idProyecto:[null]
     });
   }
 
