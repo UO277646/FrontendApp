@@ -1,3 +1,4 @@
+<div class="main-container">
 <h3>Detecciones del proyecto</h3>
 <div class="table-container">
   <button (click)="navigateToDetect()">Realizar Nueva Detección</button>
@@ -15,7 +16,7 @@
           <td>{{ deteccion.fechaCreacion }}</td>
           <td>{{ deteccion.cantidad }}</td>
           <td>
-            <button onclick="navigateToDetection(deteccion.fechaCreacion)">Detalles</button>
+            <button (click)="navigateToDetection(deteccion.fechaCreacion)">Detalles</button>
           </td>
         </tr>
       }
@@ -68,4 +69,5 @@
       <button type="submit" (click)="createRestriccion()">Crear</button>
     </form>
   </div>
+</div>
 </div>

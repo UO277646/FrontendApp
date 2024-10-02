@@ -1,8 +1,8 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #F2F1F0; /* Cambio de color de fondo */
+  background-color: #F2F1F0;
 }
 
 .container {
@@ -11,7 +11,7 @@ body {
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
@@ -23,46 +23,47 @@ h1 {
 input[type="file"] {
   display: block;
   margin: 0 auto;
-  padding: 10px;
+  padding: 15px;
   width: 70%;
-  border: 2px dashed #C0C9CC;
-  border-radius: 5px;
-  background-color: #A39D92;
+  border: 3px dashed #A39D92;
+  border-radius: 10px;
+  background-color: #F5F5F5;
   color: #423e3c;
   text-align: center;
   cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+  font-size: 1.1em;
 }
 
 input[type="file"]:hover {
-  background-color: #C0C9CC;
+  background-color: #E0E0E0;
+  border-color: #8D8D8D;
 }
 
 input[type="file"]::before {
-  content: "Subir imagen";
-}
-
-input[type="file"]::after {
-  content: "o arrastrar y soltar aquí";
+  content: "Haz clic o arrastra tu imagen aquí";
   display: block;
-  margin-top: 10px;
-  font-size: 0.8em;
-  color: #5d5c5c;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 button {
   display: block;
   margin: 20px auto;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: #A39D92;
-  color: #636059;
+  color: #ffffff;
   font-size: 16px;
   cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 button:hover {
-  background-color: #C0C9CC;
+  background-color: #8D8D8D;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 #imageContainer {
@@ -73,28 +74,47 @@ button:hover {
 .uploaded-image {
   max-width: 100%;
   height: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   margin-top: 20px;
 }
 
+/* Tabla de detecciones */
 table {
-  width: 60%;
+  width: 80%;
   margin: 20px auto;
   border-collapse: collapse;
+  font-size: 1.1em;
+  background-color: #fff;
 }
 
 th, td {
   border: 1px solid #C0C9CC;
-  padding: 8px;
-  text-align: left;
+  padding: 12px;
+  text-align: center;
 }
 
 th {
   background-color: #A39D92;
   color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
+td {
+  background-color: #f9f9f9;
+}
+
+tr:nth-child(even) td {
+  background-color: #f2f2f2;
+}
+
+/* Hover effect para las filas de la tabla */
+tr:hover td {
+  background-color: #e0e0e0;
+}
+
+/* Encabezado */
 header {
   background-color: #333;
   padding: 20px;

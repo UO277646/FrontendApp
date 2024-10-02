@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { UploadService } from '../services/upload.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,9 @@ export class FileUploadComponent{
   message!: string;
   imagePath: any;
   url!: string | ArrayBuffer | null;
+  proyectoId: any=[]
 
-  constructor(private uploadService: UploadService) { }
+  constructor(private uploadService: UploadService,private route: ActivatedRoute) { }
   
   onFileSelected(event: any): void {
     const files = event.target.files;
@@ -43,10 +45,14 @@ export class FileUploadComponent{
     reader.onload = (_event) => { 
         this.url = reader.result; 
     }
+    this.foto = event.target.files[0];
   }
   onUpload=async()=>{
     const formData: FormData = new FormData();
+    this.proyectoId=this.route.snapshot.paramMap.get('id');
     formData.append('image', this.foto, this.foto.name);
+    formData.append("proyectId",this.proyectoId);
+    console.log(this.proyectoId);
     const r= await this.uploadService.getDetectionResults(formData);
     if(r){
       const file = this.foto;

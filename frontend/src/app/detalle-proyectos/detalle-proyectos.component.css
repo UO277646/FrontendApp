@@ -1,18 +1,21 @@
-.project-container {
-  padding: 20px;
+/* Contenedor principal para centrar el contenido */
+.main-container {
+  max-width: 1200px; /* Ancho máximo para evitar que el contenido sea demasiado ancho */
+  margin: 0 auto; /* Centra horizontalmente el contenedor */
+  padding: 20px; /* Añade espacio alrededor del contenedor */
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 1200px; /* Limitar el ancho máximo del contenedor */
-  margin: 20px auto; /* Centrar el contenedor horizontalmente */
 }
 
+/* Estilos de la tabla y restricciones */
 .table-container, .restrictions-container {
   max-height: 300px;
   overflow-y: auto;
   margin-bottom: 20px;
 }
 
+/* Estilos de la tabla */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -54,11 +57,6 @@ h3 {
   margin-bottom: 15px;
   color: #333;
   font-family: Arial, sans-serif;
-}
-
-.table-container button, .restrictions-container button {
-  margin-bottom: 15px;
-  display: inline-block;
 }
 
 /* Estilos del modal */
