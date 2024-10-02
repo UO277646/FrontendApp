@@ -1,0 +1,26 @@
+<div class="detalle-deteccion-container">
+    <h2 class="title">Detecciones del {{ fecha }}</h2>
+    
+    <table class="detecciones-table">
+      <thead>
+        <tr>
+          <th>Objeto</th>
+          <th>Coordenadas (X, Y)</th>
+          <th>Ancho</th>
+          <th>Alto</th>
+          <th>Confianza</th>
+        </tr>
+      </thead>
+      <tbody>
+    @for (deteccion of detecciones ;track $index){
+        <tr>
+          <td>{{ deteccion.objeto }}</td>
+          <td>{{ deteccion.x }} , {{ deteccion.y }}</td>
+          <td>{{ deteccion.weight }}</td>
+          <td>{{ deteccion.height }}</td>
+          <td>{{ deteccion.confidence}}</td>
+        </tr>
+    }
+      </tbody>
+    </table>
+  </div>

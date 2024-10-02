@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { UploadService } from '../services/upload.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,20 +21,38 @@ export class FileUploadComponent{
   detectionResults: any = [];
   foto:any;
   imgSrc:any;
-  constructor(private uploadService: UploadService) { }
+  message!: string;
+  imagePath: any;
+  url!: string | ArrayBuffer | null;
+  proyectoId: any=[]
+
+  constructor(private uploadService: UploadService,private route: ActivatedRoute) { }
   
   onFileSelected(event: any): void {
-    this.foto = event.target.files[0];
-    if (this.foto ) {
-      // Aquí podrías agregar lógica para manejar la imagen subida
-      console.log('Archivo seleccionado:', this.foto );
+    const files = event.target.files;
+    if (files.length === 0)
+        return;
 
-      // Puedes agregar lógica para enviar la imagen a un backend si es necesario
+    const mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+        this.message = "Only images are supported.";
+        return;
     }
+
+    const reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+        this.url = reader.result; 
+    }
+    this.foto = event.target.files[0];
   }
   onUpload=async()=>{
     const formData: FormData = new FormData();
+    this.proyectoId=this.route.snapshot.paramMap.get('id');
     formData.append('image', this.foto, this.foto.name);
+    formData.append("proyectId",this.proyectoId);
+    console.log(this.proyectoId);
     const r= await this.uploadService.getDetectionResults(formData);
     if(r){
       const file = this.foto;

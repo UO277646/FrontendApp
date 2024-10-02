@@ -14,7 +14,7 @@ export class UploadService {
   
 
   public getDetectionResults=async(foto:any)=> {
-    const response=await firstValueFrom(this.http.post(this.apiUrl,foto))
+    const response=await firstValueFrom(this.http.post(this.apiUrl,foto));
     return response;
   }
   

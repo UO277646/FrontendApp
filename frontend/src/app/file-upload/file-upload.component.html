@@ -1,25 +1,34 @@
 <input type="file" (change)="onFileSelected($event)" multiple>
 <button (click)="onUpload()">Upload</button>
 <div id="imageContainer"></div>
-@if (detectionResults.length){
-<table>
-  <thead>
-  <tr>
-    <th>Label</th>
-    <th>Confidence</th>
-  </tr>
-  </thead>
-  <tbody>
-  @for(item of detectionResults[0].objects;track $index){
-  <tr>
-    
-    <td>{{ item.label }}</td>
-    <td>{{ item.confidence }}</td>
-    <!--<td>{{ item.results[0].label }}</td>
-    <td>{{ item.results[0].confidence }}</td>-->
- 
-  </tr>
+@if (url) {
+  <div id="imageContainer">
+    <img  src={{url}} alt="Imagen cargada" class="uploaded-image" />
+  </div>
 }
-  </tbody>
-</table>
+@if (detectionResults.length){
+  <table>
+    <thead>
+      <tr>
+        <th>Label</th>
+        <th>Confidence</th>
+        <th>X</th>
+        <th>Y</th>
+        <th>Weight</th>
+        <th>Height</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(item of detectionResults; track $index) {
+        <tr>
+          <td>{{ item.label }}</td>
+          <td>{{ item.confidence }}</td>
+          <td>{{ item.x }}</td>
+          <td>{{ item.y }}</td>
+          <td>{{ item.weight }}</td>
+          <td>{{ item.height }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
 }

@@ -9,12 +9,27 @@ export class ProjectService {
 
   constructor(private http:HttpClient) { }
   
-  private apiUrl = 'http://localhost:8080/project/find/all';  // Cambia esto a la URL correcta si es diferente
+  private apiUrl = 'http://localhost:8080/proyectos';  // Cambia esto a la URL correcta si es diferente
 
   
 
   public getProjects=async()=> {
-    const response=await firstValueFrom(this.http.get(this.apiUrl))
+    const response=await firstValueFrom(this.http.get(this.apiUrl+"/find/all"))
+    return response;
+  }
+
+  public createProject=async(nombreParam:any)=> {
+    
+    const response=await firstValueFrom(this.http.post(this.apiUrl+"/create",nombreParam))
+    return response;
+  }
+
+  public getDetecciones=async(idProyecto:any)=> {
+    const response=await firstValueFrom(this.http.get(this.apiUrl+"/find/detecciones/"+idProyecto))
+    return response;
+  }
+  public getRestricciones=async(idProyecto:any)=> {
+    const response=await firstValueFrom(this.http.get(this.apiUrl+"/find/restricciones/"+idProyecto))
     return response;
   }
   
