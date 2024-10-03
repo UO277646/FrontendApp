@@ -6,7 +6,7 @@
     <img  src={{url}} alt="Imagen cargada" class="uploaded-image" />
   </div>
 }
-@if (detectionResults.length){
+@if (detectionResults.objetos.length){
   <table>
     <thead>
       <tr>
@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      @for(item of detectionResults; track $index) {
+      @for(item of detectionResults.objetos; track $index) {
         <tr>
           <td>{{ item.label }}</td>
           <td>{{ item.confidence }}</td>

@@ -4,9 +4,11 @@ import { NgModule } from '@angular/core';
 import { DetalleProyectosComponent } from './detalle-proyectos/detalle-proyectos.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { DetalleDeteccionComponent } from './detalle-deteccion/detalle-deteccion.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
-    {path:"",component:ProyectosPagComponent},
+    {path:"",component:LoginComponent},
+    {path:"proyectos",component:ProyectosPagComponent},
     {path:"proyecto/:id",
         children:[
             {path:"",component:DetalleProyectosComponent},

@@ -1,6 +1,12 @@
-<app-header></app-header>
+@if(showHeader){
+  <app-header></app-header>
+}
+
 <!-- <app-file-upload></app-file-upload> -->
  <router-outlet></router-outlet>
-<footer>
-  <p>© 2024 - Todos los derechos reservados</p>
-</footer>
+ @if(showHeader){
+  <footer>
+    <p>© 2024 - Todos los derechos reservados</p>
+  </footer>
+}
+

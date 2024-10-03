@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ProyectosScrollableComponent {
 navigateToProject(idProyecto: number) {
-  const currentUrl = this.router.url;
+  const currentUrl = "http://localhost:4200";
   this.router.navigate([`${currentUrl}/proyecto/${idProyecto}`]);
 }
   proyectos: any = [];
