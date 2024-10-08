@@ -13,9 +13,11 @@ import { Router } from '@angular/router';
   styleUrl: './proyectos-scrollable.component.css'
 })
 export class ProyectosScrollableComponent {
-navigateToProject(idProyecto: number) {
+  nombre=JSON.parse(sessionStorage.getItem("loggedInUser")!).name;
+  email=JSON.parse(sessionStorage.getItem("loggedInUser")!).email;
+  navigateToProject(idProyecto: number) {
   const currentUrl = "http://localhost:4200";
-  this.router.navigate([`${currentUrl}/proyecto/${idProyecto}`]);
+  this.router.navigate([`proyecto/${idProyecto}`]);
 }
   proyectos: any = [];
   formService=inject(FormProjectService);
@@ -42,7 +44,7 @@ navigateToProject(idProyecto: number) {
   }
   create=async()=>{
     console.log(this.fb);
-
+    this.fb.controls["user"].setValue(this.email);
     const res=await this.projectService.createProject(this.fb.value);
     if(res){
       const modal = document.getElementById("createProyModal");
@@ -51,7 +53,7 @@ navigateToProject(idProyecto: number) {
     }
   }
   loadProyects=async()=>{
-    const res= await this.projectService.getProjects();
+    const res= await this.projectService.getProjects(this.email,this.nombre);
     if(res){
       this.proyectos=res;
     }

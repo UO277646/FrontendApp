@@ -10,8 +10,9 @@ export class FormProjectService {
       objeto: [""],
       fechaDesde: [null],
       fechaHasta: [null],
-      cantidad:0,
-      idProyecto:[null]
+      cantidadMin:0,
+      cantidadMax:0,
+      proyectoId:[null]
     });
   }
 
@@ -22,6 +23,8 @@ export class FormProjectService {
   getProjectForm(){
       return this.fb.group({idProyecto: [null],
         nombre: [""],
+        minConf:[0],
+        user:[""],
         fechaCreacion: [null]
       });
   }
