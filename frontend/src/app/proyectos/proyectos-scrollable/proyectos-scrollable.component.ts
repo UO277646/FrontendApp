@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class ProyectosScrollableComponent {
   nombre=JSON.parse(sessionStorage.getItem("loggedInUser")!).name;
   email=JSON.parse(sessionStorage.getItem("loggedInUser")!).email;
+  
   navigateToProject(idProyecto: number) {
   const currentUrl = "http://localhost:4200";
   this.router.navigate([`proyecto/${idProyecto}`]);

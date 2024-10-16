@@ -12,7 +12,7 @@ import { UploadService } from '../services/upload.service';
 @Component({
   selector: 'app-file-upload',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './file-upload.component.html',
   styleUrl: './file-upload.component.css'
 })

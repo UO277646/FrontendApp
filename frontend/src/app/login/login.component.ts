@@ -1,6 +1,7 @@
 declare var google:any;
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { ValidatorService } from '../services/validator/validator.service';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   private router=inject(Router)
+  private validatorService=inject(ValidatorService);
   ngOnInit(): void{
     google.accounts.id.initialize({
       client_id:"1043590116943-7mn3qj6i76kuvmv65sb1nbfp2sml5lo4.apps.googleusercontent.com",
@@ -26,10 +28,13 @@ export class LoginComponent {
   private decodeToken(token:string){
     return JSON.parse(atob(token.split(".")[1]));
   }
-  handleLogin(response:any){
+  async handleLogin(response:any){
     if(response){
       console.log(response);
       console.log(response.credential);
+      //Validate
+      const result = await this.validatorService.validateToken(response.credential);
+      localStorage.setItem('authToken', result.token);
       //Decode
       const payLoad=this.decodeToken(response.credential);
 

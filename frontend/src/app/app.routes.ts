@@ -7,16 +7,17 @@ import { DetalleDeteccionComponent } from './detalle-deteccion/detalle-deteccion
 import { LoginComponent } from './login/login.component';
 import { loginGuard } from './guards/loginGuard.guard';
 import { FallosComponent } from './fallos/fallos.component';
+import { auth } from './guards/authGuard.guard';
 
 export const routes: Routes = [
     {path:"",component:LoginComponent},
     {path:"proyectos",component:ProyectosPagComponent,canActivate:[loginGuard]},
-    {path:"proyecto/:id",canActivate:[loginGuard],
+    {path:"proyecto/:id",canActivate:[loginGuard,auth],
         children:[
-            {path:"",component:DetalleProyectosComponent,canActivate:[loginGuard]},
-            {path:"fallos/:idRec",component:FallosComponent,canActivate:[loginGuard]},
-            {path:"detect",component:FileUploadComponent,canActivate:[loginGuard]},
-            {path:"detections/:fecha",component:DetalleDeteccionComponent,canActivate:[loginGuard]}
+            {path:"",component:DetalleProyectosComponent,canActivate:[loginGuard,auth]},
+            {path:"fallos/:idRec",component:FallosComponent,canActivate:[loginGuard,auth]},
+            {path:"detect",component:FileUploadComponent,canActivate:[loginGuard,auth]},
+            {path:"detections/:fecha",component:DetalleDeteccionComponent,canActivate:[loginGuard,auth]}
         ]
     },
     //{path:"proyecto/:id/detect",component:FileUploadComponent},
