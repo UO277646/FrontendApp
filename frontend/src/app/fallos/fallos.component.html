@@ -1,0 +1,23 @@
+
+<div class="fallos-container">
+    <h2 class="fallos-title">Fallos de Restricción</h2>
+    
+      <table class="fallos-table">
+        <thead>
+          <tr>
+            <th>Fallo ID</th>
+            <th>Datos del Fallo</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (fallo of fallos; track $index) {
+            <tr>
+            <td>{{ fallo.falloId }}</td>
+            <td>{{ fallo.datos }}</td>
+            </tr>
+        }
+        </tbody>
+      </table>
+    
+  </div>
+  

@@ -15,10 +15,10 @@
     @for (deteccion of detecciones ;track $index){
         <tr>
           <td>{{ deteccion.objeto }}</td>
-          <td>{{ deteccion.x }} , {{ deteccion.y }}</td>
-          <td>{{ deteccion.weight }}</td>
-          <td>{{ deteccion.height }}</td>
-          <td>{{ deteccion.confidence}}</td>
+          <td>{{ deteccion.x | number: '1.2-2' }} , {{ deteccion.y | number: '1.2-2' }}</td>
+          <td>{{ deteccion.weight | number: '1.2-2' }}</td>
+          <td>{{ deteccion.height | number: '1.2-2'}}</td>
+          <td>{{ deteccion.confidence | number: '1.2-2'}}</td>
         </tr>
     }
       </tbody>

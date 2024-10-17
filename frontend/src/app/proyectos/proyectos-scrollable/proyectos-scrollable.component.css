@@ -1,116 +1,98 @@
-.project-container {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: 0 auto;
+/* Estilos existentes... */
+.project-container { padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 800px; margin: 0 auto; }
+
+.project-container button { display: block; margin-bottom: 20px; padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+
+.project-container button:hover { background-color: #0056b3; }
+
+table { width: 100%; border-collapse: collapse; background-color: white; border-radius: 8px; overflow: hidden; }
+
+th, td { padding: 12px 15px; text-align: left; }
+
+th { background-color: #007bff; color: white; text-transform: uppercase; font-size: 14px; }
+
+tr:nth-child(even) { background-color: #f2f2f2; }
+
+tr:hover { background-color: #f1f1f1; }
+
+td { border-bottom: 1px solid #ddd; }
+
+td button { padding: 5px 10px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+
+td button:hover { background-color: #218838; } 
+
+/* Estilos para la ventana modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: auto; /* Permite scroll si el contenido es muy largo */
 }
 
-.project-container button {
-  display: block;
+.modal-content {
+  background-color: white;
+  margin: 5% auto; /* Reducido para dar más espacio */
+  padding: 30px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px; /* Máximo ancho para pantallas grandes */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.modal-content h2 {
   margin-bottom: 20px;
-  padding: 10px 15px;
+  color: #333;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.modal-content label {
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+/* .modal-content input[type="number"] {
+  -moz-appearance: textfield; /* Firefox 
+} 
+*/
+
+.modal-content input[type="number"]::-webkit-outer-spin-button,
+.modal-content input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.modal-content button {
+  padding: 12px 20px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-}
-
-.project-container button:hover {
-  background-color: #0056b3;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-th, td {
-  padding: 12px 15px;
-  text-align: left;
-}
-
-th {
-  background-color: #007bff;
-  color: white;
-  text-transform: uppercase;
-  font-size: 14px;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-tr:hover {
-  background-color: #f1f1f1;
-}
-
-td {
-  border-bottom: 1px solid #ddd;
-}
-
-td button {
-  padding: 5px 10px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-td button:hover {
-  background-color: #218838;
-}
-/* Estilos para la ventana modal */
-/* Estilos para la ventana modal */
-.modal {
-  display: none; /* Oculto por defecto */
-  position: fixed;
-  z-index: 1; /* Aparece por encima de otros elementos */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
-}
-
-.modal-content {
-  background-color: white;
-  margin: 10% auto; /* Centra el modal verticalmente */
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px; /* Ancho del modal ajustado */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative; /* Para poder colocar la cruz dentro */
-  text-align: center;
-}
-
-.modal-content h2 {
-  margin-bottom: 20px;
-}
-
-.modal-content input {
-  width: 90%; /* Ajusta el input para que no se salga */
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-}
-
-.modal-content button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
 .modal-content button:hover {
@@ -120,14 +102,23 @@ td button:hover {
 .close {
   position: absolute;
   top: 10px;
-  right: 10px; /* Coloca la cruz dentro del modal */
+  right: 15px;
   color: #aaa;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
 }

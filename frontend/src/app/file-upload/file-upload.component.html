@@ -1,12 +1,12 @@
 <input type="file" (change)="onFileSelected($event)" multiple>
-<button (click)="onUpload()">Upload</button>
+<button class="btn btn-primary" (click)="onUpload()">Upload</button>
 <div id="imageContainer"></div>
 @if (url) {
   <div id="imageContainer">
     <img  src={{url}} alt="Imagen cargada" class="uploaded-image" />
   </div>
 }
-@if (detectionResults.length){
+@if (detectionResults.objetos){
   <table>
     <thead>
       <tr>
@@ -19,14 +19,14 @@
       </tr>
     </thead>
     <tbody>
-      @for(item of detectionResults; track $index) {
+      @for(item of detectionResults.objetos; track $index) {
         <tr>
-          <td>{{ item.label }}</td>
-          <td>{{ item.confidence }}</td>
-          <td>{{ item.x }}</td>
-          <td>{{ item.y }}</td>
-          <td>{{ item.weight }}</td>
-          <td>{{ item.height }}</td>
+          <td>{{ item.label  }}</td>
+          <td>{{ item.confidence | number: '1.2-2'}}</td>
+          <td>{{ item.x | number: '1.2-2'}}</td>
+          <td>{{ item.y | number: '1.2-2'}}</td>
+          <td>{{ item.weight | number: '1.2-2' }}</td>
+          <td>{{ item.height | number: '1.2-2'}}</td>
         </tr>
       }
     </tbody>

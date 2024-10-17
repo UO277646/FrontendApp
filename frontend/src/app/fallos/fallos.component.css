@@ -1,0 +1,121 @@
+.fallos-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 1200px; /* Aumentado de 800px a 1200px para hacer la tabla más ancha */
+  margin: 0 auto;
+}
+
+.fallos-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+}
+
+.fallos-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 15px;
+}
+
+.fallos-table th, .fallos-table td {
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.fallos-table th {
+  background-color: #007bff;
+  color: #fff;
+  position: sticky;
+  top: 0;
+}
+
+.fallos-table th:first-child,
+.fallos-table td:first-child {
+  width: 20%; /* Reducido de 30% a 20% */
+  border-right: 1px solid #ddd;
+}
+
+.fallos-table th:nth-child(2),
+.fallos-table td:nth-child(2) {
+  width: 20%; /* Nueva columna para información adicional */
+  border-right: 1px solid #ddd;
+}
+
+.fallos-table th:last-child,
+.fallos-table td:last-child {
+  width: 60%; /* Aumentado de 70% a 60% para detalles del fallo */
+}
+
+.fallos-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.fallos-table td {
+  color: #555;
+}
+
+.no-fallos-message {
+  text-align: center;
+  font-size: 18px;
+  color: #888;
+}
+
+/* Estilos para los detalles del fallo */
+.fallo-detalles {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.fallo-detalles-titulo {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.fallo-detalles-descripcion {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .fallos-container {
+    padding: 10px;
+  }
+
+  .fallos-table th, .fallos-table td {
+    padding: 8px 10px;
+  }
+  
+  .fallos-table th:first-child,
+  .fallos-table td:first-child {
+    width: 30%;
+  }
+
+  .fallos-table th:nth-child(2),
+  .fallos-table td:nth-child(2) {
+    width: 30%;
+  }
+
+  .fallos-table th:last-child,
+  .fallos-table td:last-child {
+    width: 40%;
+  }
+}
+
+@media (max-width: 480px) {
+  .fallos-table {
+    font-size: 14px;
+  }
+
+  .fallos-table th, .fallos-table td {
+    padding: 6px 8px;
+  }
+
+  .fallo-detalles {
+    font-size: 12px;
+  }
+}

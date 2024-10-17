@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { UploadService } from '../services/upload.service';
 import { ActivatedRoute } from '@angular/router';
+import { UploadService } from '../services/upload.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-file-upload',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './file-upload.component.html',
   styleUrl: './file-upload.component.css'
 })
@@ -53,7 +53,7 @@ export class FileUploadComponent{
     formData.append('image', this.foto, this.foto.name);
     formData.append("proyectId",this.proyectoId);
     console.log(this.proyectoId);
-    const r= await this.uploadService.getDetectionResults(formData);
+    const r:ObjetoImagenResponse= await this.uploadService.getDetectionResults(formData);
     if(r){
       const file = this.foto;
       const reader = new FileReader();
@@ -65,10 +65,23 @@ export class FileUploadComponent{
       };
       reader.readAsDataURL(file);
       this.detectionResults= r;
+      this.url='data:image/png;base64,'+r.image;
       console.log(this.detectionResults);
     }else{
       console.log("Error al cargar los datos");
     }
   }
 }
+export interface DetectionResult {
+  x: number;
+  y: number;
+  weight: number;
+  height: number;
+  confidence: number;
+  label: string;
+}
 
+export interface ObjetoImagenResponse {
+  objetos: DetectionResult[];
+  image: string;  // Asumiendo que la imagen será una cadena base64
+}

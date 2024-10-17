@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeteccionService } from '../services/detecciones/deteccion.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-detalle-deteccion',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './detalle-deteccion.component.html',
   styleUrl: './detalle-deteccion.component.css'
 })

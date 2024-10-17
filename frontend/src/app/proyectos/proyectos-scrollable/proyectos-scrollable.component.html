@@ -29,6 +29,8 @@
         <form [formGroup]="fb">
           <label for="projectName">Nombre del proyecto:</label>
           <input type="text" formControlName="nombre" id="projectName" placeholder="Introduce el nombre del proyecto" required />
+          <label for="minConf">Confianza mínima:</label>
+          <input type="number" formControlName="minConf" id="minConf" placeholder="Introduce la confianza mínima" step="0.01" required />
           <button type="submit" (click)="create()">Crear</button>
         </form>
       </div>

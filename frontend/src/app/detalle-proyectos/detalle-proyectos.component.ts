@@ -13,6 +13,11 @@ import { RestriccionService } from '../services/restricciones/restriccion.servic
   styleUrl: './detalle-proyectos.component.css'
 })
 export class DetalleProyectosComponent {
+  
+navigateToFallo(arg0: any) {
+  this.proyectoId;
+  this.router.navigate([`proyecto/${this.proyectoId}/fallos/`+arg0]);}
+
 navigateToDetect() {
   const currentUrl = this.router.url;
   this.router.navigate([`${currentUrl}/detect`]);
@@ -37,7 +42,8 @@ navigateToDetect() {
       modal!.style.display = "none";
     }
     createRestriccion=async()=>{
-      this.fb.controls["idProyecto"].setValue(this.route.snapshot.paramMap.get('id'));
+      this.fb.controls["proyectoId"].setValue(this.route.snapshot.paramMap.get('id'));
+      console.log(this.fb.value);
       const res=await this.restriccionService.createRestriccion(this.fb.value);
       if(res){
         const modal = document.getElementById("createRestriccionModal");

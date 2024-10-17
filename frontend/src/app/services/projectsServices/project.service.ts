@@ -13,8 +13,8 @@ export class ProjectService {
 
   
 
-  public getProjects=async()=> {
-    const response=await firstValueFrom(this.http.get(this.apiUrl+"/find/all"))
+  public getProjects=async(email:string,nombre:string)=> {
+    const response=await firstValueFrom(this.http.get(this.apiUrl+"/find/proyectos/"+email+"/"+nombre))
     return response;
   }
 

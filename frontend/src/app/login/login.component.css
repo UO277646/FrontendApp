@@ -1,0 +1,42 @@
+/* Contenedor de fondo para la imagen */
+.background-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh; /* Ocupa toda la pantalla */
+    background-image: url('https://www.manitowoc.com/sites/default/files/media/divers/images/2022-05/Potain-cranes-lead-construction-on-Chorus-Life-smart-city-project-in-Bergamo-northern-Italy-3.jpg');
+    background-size: cover; /* Hace que la imagen ocupe todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat;
+  }
+  
+  /* Caja de inicio de sesión */
+  .login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo negro */
+    border-radius: 10px;
+    text-align: center;
+    color: white; /* Texto blanco */
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo general del botón de Google, sin tocar directamente su renderización */
+  #google-btn {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #google-btn div {
+    filter: none !important; /* Evita el desenfoque */
+    -webkit-transform: none !important; /* Evita problemas con escalado */
+    transform: none !important;
+  }
+  
