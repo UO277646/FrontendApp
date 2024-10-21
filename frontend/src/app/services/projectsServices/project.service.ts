@@ -6,6 +6,10 @@ import { Observable, firstValueFrom } from 'rxjs';
   providedIn: 'root'
 })
 export class ProjectService {
+  deleteProyect=async(arg0: any)=> {
+    const response=await firstValueFrom(this.http.delete(this.apiUrl+"/delete/"+arg0))
+    return response;
+  }
 
   constructor(private http:HttpClient) { }
   

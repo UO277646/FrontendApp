@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +22,8 @@ export class FormProjectService {
 
   getProjectForm(){
       return this.fb.group({idProyecto: [null],
-        nombre: [""],
-        minConf:[0],
+        nombre: ["",Validators.required],
+        minConf:[0.7,Validators.required],
         user:[""],
         fechaCreacion: [null]
       });

@@ -1,7 +1,7 @@
 /* Global Styles */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f5f5f5;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  background-color: #f0f2f5;
   color: #333;
   line-height: 1.6;
 }
@@ -10,91 +10,185 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-
+.datatable-header-cell-label{
+  font-size: 30px !important;
+}
 h3 {
   color: #2c3e50;
-  border-bottom: 2px solid #3498db;
+  border-bottom: 3px solid #3498db;
   padding-bottom: 10px;
-  margin-top: 30px;
+  margin-top: 0;
   margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 1.8em;
 }
 
-/* Table Styles */
-.table-container, .restrictions-container {
-  background-color: #fff;
+/* ngx-datatable Styles */
+.ngx-datatable.material {
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  background-color: #f8f9fa;
   overflow: hidden;
-  padding: 20px;
 }
 
-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin-top: 20px;
+.ngx-datatable.material .datatable-header {
+  background-color: #ffffff;
+  border-bottom: 3px solid #3498db;
+  border-radius: 8px 8px 0 0;
 }
 
-th, td {
-  padding: 12px 15px;
-  text-align: left;
+.ngx-datatable.material .datatable-header .datatable-header-cell {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #2c3e50;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.ngx-datatable.material .datatable-body .datatable-body-row {
   border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.3s ease;
 }
 
-thead {
-  background-color: #3498db;
-  color: #fff;
-}
-
-thead th {
-  border-top: 1px solid #3498db;
-}
-
-thead th:first-child {
-  border-top-left-radius: 8px;
-}
-
-thead th:last-child {
-  border-top-right-radius: 8px;
-}
-
-tbody tr:last-child td {
-  border-bottom: none;
-}
-
-tbody tr:hover {
+.ngx-datatable.material .datatable-body .datatable-body-row:hover {
   background-color: #f0f0f0;
 }
 
-/* Button Styles */
-button {
-  background-color: #3498db;
-  color: #fff;
+.ngx-datatable.material .datatable-body .datatable-body-cell {
+  padding: 15px;
+  font-size: 0.95em;
+  color: #444;
+}
+
+/* Pagination */
+.ngx-datatable-footer .page-count {
+  font-weight: bold;
+  color: #2c3e50;
+}
+.custom-table {
+  box-shadow: none;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.custom-table .datatable-header {
+  background-color: #f0f0f0;
+}
+
+.custom-table .date-cell {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.custom-table .quantity-cell {
+  text-align: right;
+  font-weight: bold;
+}
+
+.custom-table .custom-button {
+  background-color: #17a2b8;
   border: none;
-  padding: 10px 15px;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/* Additional styles to override ngx-datatable defaults */
+::ng-deep .ngx-datatable.material .datatable-header .datatable-header-cell {
+  font-weight: bold;
+  color: #333;
+  font-size: 15px;
+}
+
+::ng-deep .ngx-datatable.material .datatable-body .datatable-body-row {
+  border-bottom: 1px solid #ddd;
+}
+
+::ng-deep .ngx-datatable.material .datatable-body .datatable-body-cell {
+  padding: 8px;
+}
+/* Button Styles */
+.btn {
+  border: none;
+  padding: 8px 15px;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease;
-  margin-bottom: 20px;
-  display: inline-block;
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
-button:hover {
+.btn-info {
+  background-color: #3498db;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.btn-info:hover {
   background-color: #2980b9;
-  transform: translateY(-2px);
+  transform: scale(1.05);
 }
 
-button:active {
-  transform: translateY(0);
+/* Filter Input Styles */
+.datatable-filter {
+  margin-bottom: 20px;
 }
 
+.filter-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.filter-input:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 15px;
+  }
+  
+  .btn {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .ngx-datatable.material .datatable-header .datatable-header-cell,
+  .ngx-datatable.material .datatable-body .datatable-body-cell {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .btn {
+    padding: 8px 12px;
+    font-size: 0.875rem;
+  }
+
+  .ngx-datatable.material {
+    font-size: 0.85rem;
+  }
+}
 /* Modal Styles */
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
@@ -106,12 +200,12 @@ button:active {
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto;
-  padding: 30px;
+  padding: 20px;
   border: 1px solid #888;
   width: 80%;
   max-width: 500px;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .close {
@@ -120,99 +214,43 @@ button:active {
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
-  transition: color 0.3s ease;
 }
 
 .close:hover,
 .close:focus {
   color: #000;
   text-decoration: none;
+  cursor: pointer;
 }
 
 /* Form Styles */
-form {
+.modal form {
   display: flex;
   flex-direction: column;
 }
 
-label {
-  margin-top: 15px;
+.modal label {
+  margin-top: 10px;
   font-weight: bold;
-  color: #2c3e50;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="number"] {
-  margin-top: 5px;
-  padding: 10px;
+.modal input {
+  margin-bottom: 15px;
+  padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="number"]:focus {
-  border-color: #3498db;
-  outline: none;
+.modal button[type="submit"] {
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* SVG Icon Styles */
-svg {
-  vertical-align: middle;
-  margin-right: 5px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .main-container {
-    padding: 10px;
-  }
-  
-  th, td {
-    padding: 8px 10px;
-  }
-  
-  .modal-content {
-    width: 95%;
-    padding: 20px;
-  }
-  
-  button {
-    width: 100%;
-    margin-bottom: 15px;
-  }
-  .table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .table th, .table td {
-    vertical-align: middle;
-  }
-  
-  .btn-info {
-    color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-  }
-  
-  .btn-info:hover {
-    color: #fff;
-    background-color: #138496;
-    border-color: #117a8b;
-  }
-  
-  @media (max-width: 576px) {
-    .table-responsive {
-      font-size: 0.875rem;
-    }
-  
-    .btn-sm {
-      padding: 0.25rem 0.5rem;
-      font-size: 0.75rem;
-    }
-  }
+.modal button[type="submit"]:hover {
+  background-color: #2980b9;
 }

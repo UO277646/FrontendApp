@@ -10,6 +10,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './fallos.component.css'
 })
 export class FallosComponent {
+deleteFallo(arg0: any) {
+  this.fallosService.deleteFallo(arg0);
+}
   constructor(private route: ActivatedRoute){
 
   }

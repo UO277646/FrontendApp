@@ -1,26 +1,48 @@
 <div class="project-container">
-      <button (click)="showModal()" >Nuevo proyecto</button>
-<table>
-<tr>
-      <th>
-            Nombre
-      </th>
-      <th>
-            Fecha
-      </th>
-      <th>
-            Detalles
-      </th>
+      <button class="btn btn-primary btn-sm" (click)="showModal()" >Nuevo proyecto</button>
+      <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                  <thead class="table-primary">
+            <tr>
+                  <th>
+                        Nombre
+                  </th>
+                  <th>
+                        Fecha
+                  </th>
+                  <th>
+                        Detalles
+                  </th>
+                  <th>
+                        Editar
+                  </th>
+                  <th>
+                        Borrar
+                  </th>
 
-</tr>
-@for (proyecto of proyectos ;track $index){
-      <tr>
-            <td>{{ proyecto.nombre }}</td>
-            <td>{{ proyecto.fechaCreacion }}</td>
-            <td><button (click)="navigateToProject(proyecto.idProyecto)">Detalles</button></td>
-      </tr> 
-}
-</table>
+            </tr>
+            </thead>
+            <tbody>
+            @for (proyecto of proyectos ;track $index){
+                  <tr>
+                        <td>{{ proyecto.nombre }}</td>
+                        <td>{{ proyecto.fechaCreacion }}</td>
+                        <td><button class="btn btn-info btn-sm" (click)="navigateToProject(proyecto.idProyecto)">Detalles</button></td>  
+                        <td>
+                              <button class="btn btn-warning" (click)="editProyecto()">
+                              Editar
+                              </button>
+                        </td>
+                        <td>
+                              <button class="btn btn-danger" (click)="setProyectoForDelete( proyecto.idProyecto)">
+                              Borrar
+                              </button>
+                        </td>
+                  </tr> 
+            }
+            </tbody>
+            </table>
+      </div>
 </div>
 <div id="createProyModal" class="modal">
       <div class="modal-content">
@@ -28,10 +50,18 @@
         <h2>Crear nuevo proyecto</h2>
         <form [formGroup]="fb">
           <label for="projectName">Nombre del proyecto:</label>
-          <input type="text" formControlName="nombre" id="projectName" placeholder="Introduce el nombre del proyecto" required />
+          <input [class.border-danger]="fb.controls['nombre'].errors && fb.controls['nombre'].touched" type="text" formControlName="nombre" id="projectName" placeholder="Introduce el nombre del proyecto" required />
           <label for="minConf">Confianza mínima:</label>
-          <input type="number" formControlName="minConf" id="minConf" placeholder="Introduce la confianza mínima" step="0.01" required />
+            <input type="number" formControlName="minConf" id="minConf" placeholder="Introduce la confianza minima" required min="0"  />
+            @if(errorMessage!=""){
+                  <p class="text-danger">{{errorMessage}}</p>
+            }
           <button type="submit" (click)="create()">Crear</button>
+          
         </form>
       </div>
     </div>
+    @if(showBorrarModal){
+      <app-modal-borrar (funcionBorrar)="deleteProyecto(idProyecto)" ></app-modal-borrar>
+    
+     }

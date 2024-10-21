@@ -6,7 +6,8 @@
         <thead>
           <tr>
             <th>Fallo ID</th>
-            <th>Datos del Fallo</th>
+            <th>Detalles</th>
+            <th>Borrar</th>
           </tr>
         </thead>
         <tbody>
@@ -14,7 +15,16 @@
             <tr>
             <td>{{ fallo.falloId }}</td>
             <td>{{ fallo.datos }}</td>
+            
+            <td>
+              <div class="boton-borrar">
+              <button class="btn btn-danger" (click)="deleteFallo( fallo.falloId)">
+                Borrar
+              </button>
+              </div>
+            </td>
             </tr>
+          
         }
         </tbody>
       </table>
