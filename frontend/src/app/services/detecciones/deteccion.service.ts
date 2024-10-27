@@ -16,7 +16,10 @@ export class DeteccionService {
       'Authorization': `Bearer ${token}`
     });
   }
-
+  deleteDeteccion= async(idRec: any)=> {
+    const response=await firstValueFrom(this.http.delete(this.apiUrl+"/delete/"+idRec))
+    return response;
+  }
   public getDeteccionesDia = async (proyecto: string, dia: string): Promise<any> => {
     const headers = this.getHeaders();
     const url = `${this.apiUrl}/get/${proyecto}/${dia}`;

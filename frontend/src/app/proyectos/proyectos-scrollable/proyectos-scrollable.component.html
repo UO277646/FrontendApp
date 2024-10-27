@@ -29,7 +29,7 @@
                         <td>{{ proyecto.fechaCreacion }}</td>
                         <td><button class="btn btn-info btn-sm" (click)="navigateToProject(proyecto.idProyecto)">Detalles</button></td>  
                         <td>
-                              <button class="btn btn-warning" (click)="editProyecto()">
+                              <button class="btn btn-warning" (click)="editProyecto(proyecto)">
                               Editar
                               </button>
                         </td>
@@ -47,21 +47,41 @@
 <div id="createProyModal" class="modal">
       <div class="modal-content">
         <span class="close" (click)="closeModal()">&times;</span>
-        <h2>Crear nuevo proyecto</h2>
+        <h2>{{ editPro ? 'Editar proyecto' : 'Crear nuevo proyecto' }}</h2>
         <form [formGroup]="fb">
           <label for="projectName">Nombre del proyecto:</label>
           <input [class.border-danger]="fb.controls['nombre'].errors && fb.controls['nombre'].touched" type="text" formControlName="nombre" id="projectName" placeholder="Introduce el nombre del proyecto" required />
           <label for="minConf">Confianza mínima:</label>
-            <input type="number" formControlName="minConf" id="minConf" placeholder="Introduce la confianza minima" required min="0"  />
+            <input type="number" formControlName="minConf" [class.border-danger]="fb.controls['minConf'].errors && fb.controls['minConf'].touched" id="minConf" placeholder="Introduce la confianza minima" required min="0"  />
             @if(errorMessage!=""){
                   <p class="text-danger">{{errorMessage}}</p>
             }
-          <button type="submit" (click)="create()">Crear</button>
+            <button type="submit" (click)="editPro ? edit() : create()">
+                  {{ editPro ? 'Editar' : 'Crear' }}
+                </button>
           
         </form>
       </div>
     </div>
-    @if(showBorrarModal){
-      <app-modal-borrar (funcionBorrar)="deleteProyecto(idProyecto)" ></app-modal-borrar>
-    
-     }
+    <!-- @if(showBorrarModal){ -->
+    <div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show': showBorrarModal}" [ngStyle]="{'display': showBorrarModal ? 'block' : 'none'}">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmar eliminación</h5>
+            <button type="button" class="close" (click)="closeDelete()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>¿Estás seguro de que quieres eliminar el proyecto?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeDelete()">No</button>
+            <button type="button" class="btn btn-danger" (click)="deleteProyecto(idProyecto)">Sí, eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <!-- } -->

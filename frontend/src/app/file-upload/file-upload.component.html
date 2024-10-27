@@ -1,5 +1,11 @@
+<div class="container-fluid py-5 bg-gray-400">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-9">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="mb-3">
 <input type="file" (change)="onFileSelected($event)" multiple>
-<button class="btn btn-primary" (click)="onUpload()">Upload</button>
+<button class="btn-p" (click)="onUpload()">Upload</button>
 <div id="imageContainer"></div>
 @if (url) {
   <div id="imageContainer">
@@ -7,28 +13,66 @@
   </div>
 }
 @if (detectionResults.objetos){
-  <table>
-    <thead>
+  <div class="container-tabla">
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+          <thead class="table-primary">
       <tr>
+        <th>ID</th>
         <th>Label</th>
         <th>Confidence</th>
         <th>X</th>
         <th>Y</th>
         <th>Weight</th>
         <th>Height</th>
+        <th>Borrar</th>
       </tr>
     </thead>
     <tbody>
       @for(item of detectionResults.objetos; track $index) {
         <tr>
+          <td>{{ item.idDeteccion  }}</td>
           <td>{{ item.label  }}</td>
           <td>{{ item.confidence | number: '1.2-2'}}</td>
           <td>{{ item.x | number: '1.2-2'}}</td>
           <td>{{ item.y | number: '1.2-2'}}</td>
           <td>{{ item.weight | number: '1.2-2' }}</td>
           <td>{{ item.height | number: '1.2-2'}}</td>
+          <td>
+            <div class="boton-borrar">
+            <button class="btn btn-danger" (click)="deleteDeteccion(item.idDeteccion)">
+              Borrar
+            </button>
+            </div>
+          </td>
         </tr>
       }
     </tbody>
   </table>
+  </div>
+</div>
 }
+@if (detectionResults.fallos){
+  <div>
+    <h4 class="mb-3">Fallos Detectados</h4>
+    <div class="list-group">
+      
+      @for (fallo of detectionResults.fallos.split('\n'); track $index) {
+        @if(fallo.trim() !== ''){
+        <div class="list-group-item list-group-item-danger">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Fallo #{{ $index + 1 }}</h5>
+          </div>
+          <p class="mb-1">{{ fallo }}</p>
+        </div>
+      }
+      }
+    </div>
+  </div>
+}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

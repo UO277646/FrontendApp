@@ -1,11 +1,19 @@
-<div id="delModal" class="modal">
+<div class="modal"  role="dialog" >
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <span class="close" (click)="closeModal()">&times;</span>
-      <h2>Esta seguro que desea borrar</h2>
-        
-        <button type="submit" (click)="borrar()">Si</button>
-        <button type="submit" (click)="closeModal()">No</button>
-
-      
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar eliminación</h5>
+        <button type="button" class="close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro de que quieres eliminar esto?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">No</button>
+        <button type="button" class="btn btn-danger" (click)="deleteItem()">Sí, eliminar</button>
+      </div>
     </div>
   </div>
+</div>

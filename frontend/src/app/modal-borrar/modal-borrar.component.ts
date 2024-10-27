@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, EventEmitter, Input, input, Output  } from '@angular/core';
 
 @Component({
   selector: 'app-modal-borrar',
@@ -8,13 +8,20 @@ import { Component, Input, input } from '@angular/core';
   styleUrl: './modal-borrar.component.css'
 })
 export class ModalBorrarComponent {
-   @Input() funcionBorrar :any;
+  displayModal: string = 'none';
+  @Input() idProyecto: number | undefined;
+  @Output() delete = new EventEmitter<void>();
+  openModal() {
+    this.displayModal = 'block';
+  }
 
-borrar() {
-  this.funcionBorrar;
-}
-closeModal() {
-  
-}
+  closeModal() {
+    this.displayModal = 'none';
+  }
+
+  deleteItem() {
+    this.delete.emit();
+    this.closeModal()
+  }
 
 }

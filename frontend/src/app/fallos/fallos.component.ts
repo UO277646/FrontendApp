@@ -10,8 +10,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './fallos.component.css'
 })
 export class FallosComponent {
-deleteFallo(arg0: any) {
-  this.fallosService.deleteFallo(arg0);
+  async deleteFallo(arg0: any) {
+    await this.fallosService.deleteFallo(arg0);
+    this.loadFallos();
+
 }
   constructor(private route: ActivatedRoute){
 

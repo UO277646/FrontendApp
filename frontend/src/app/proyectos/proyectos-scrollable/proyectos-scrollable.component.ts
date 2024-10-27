@@ -14,14 +14,34 @@ import { ModalBorrarComponent } from "../../modal-borrar/modal-borrar.component"
   styleUrl: './proyectos-scrollable.component.css'
 })
 export class ProyectosScrollableComponent {
-deleteProyecto(arg0: any) {
-  this.projectService.deleteProyect(arg0);
+  async edit() {
+  if(!this.checkErrors(this.fb)){
+    this.fb.controls["user"].setValue(this.email);
+    const res=await this.projectService.editProject(this.idProyecto,this.fb.value);
+    if(res){
+      const modal = document.getElementById("createProyModal");
+      modal!.style.display = "none";
+      this.editPro=false;
+      this.idProyecto=-1;
+      this.loadProyects();
+    } 
+  }else{
+    this.errorMessage="Complete los campos vacios"
+  }
+}
+  async deleteProyecto(arg0: any) {
+  await this.projectService.deleteProyect(arg0);
+  this.showBorrarModal=false;
+  this.loadProyects();
 }
 errorMessage: any="";
 idProyecto: any=-1;
-
-editProyecto() {
-throw new Error('Method not implemented.');
+editPro=false;
+editProyecto(proyecto:any) {
+  this.editPro=true;
+  this.idProyecto=proyecto.idProyecto;
+  this.fb=this.formService.getProjectForm(proyecto)
+  this.showModal();
 }
 setProyectoForDelete(arg0: any) {
   this.showBorrarModal=true;
@@ -56,9 +76,13 @@ setProyectoForDelete(arg0: any) {
   closeModal(){
     const modal = document.getElementById("createProyModal");
     modal!.style.display = "none";
+    this.editPro=false;
+  }
+  closeDelete(){
+    this.idProyecto=-1;
+    this.showBorrarModal=false;
   }
   create=async()=>{
-    console.log(this.fb);
     if(!this.checkErrors(this.fb)){
       this.fb.controls["user"].setValue(this.email);
       const res=await this.projectService.createProject(this.fb.value);
@@ -96,4 +120,11 @@ setProyectoForDelete(arg0: any) {
     return hasErrors;
   };
 
+}
+export interface Proyecto{
+  proyectId:number;
+  nombre: string,
+  minConf:number ,
+  user:string,
+  fechaCreacion:string
 }
