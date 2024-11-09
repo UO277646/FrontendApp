@@ -5,20 +5,58 @@ body {
   background-color: #F2F1F0;
 }
 
-.container {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
+
 
 h1 {
   color: #333;
   text-align: center;
   margin-bottom: 30px;
 }
+.container-tabla {
+  max-width: 1200px;
+  margin: auto; /* Centra la tabla */
+  padding: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de encabezado */
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Colores alternos para filas */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.2s ease;
+}
+
+td {
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+}
+
+
 
 input[type="file"] {
   display: block;
@@ -47,7 +85,7 @@ input[type="file"]::before {
   font-size: 1.2em;
 }
 
-button {
+.btn-p {
   display: block;
   margin: 20px auto;
   padding: 12px 24px;
@@ -61,7 +99,7 @@ button {
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-button:hover {
+.btn-p:hover {
   background-color: #8D8D8D;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
@@ -80,41 +118,6 @@ button:hover {
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   margin-top: 20px;
-}
-
-/* Tabla de detecciones */
-table {
-  width: 80%;
-  margin: 20px auto;
-  border-collapse: collapse;
-  font-size: 1.1em;
-  background-color: #fff;
-}
-
-th, td {
-  border: 1px solid #C0C9CC;
-  padding: 12px;
-  text-align: center;
-}
-
-th {
-  background-color: #A39D92;
-  color: #ffffff;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-td {
-  background-color: #f9f9f9;
-}
-
-tr:nth-child(even) td {
-  background-color: #f2f2f2;
-}
-
-/* Hover effect para las filas de la tabla */
-tr:hover td {
-  background-color: #e0e0e0;
 }
 
 /* Encabezado */

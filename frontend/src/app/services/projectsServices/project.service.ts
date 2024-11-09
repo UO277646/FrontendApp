@@ -6,6 +6,15 @@ import { Observable, firstValueFrom } from 'rxjs';
   providedIn: 'root'
 })
 export class ProjectService {
+  public editProject=async(id:any,nombreParam:any)=> {
+    console.log(nombreParam)
+    const response=await firstValueFrom(this.http.put(this.apiUrl+"/update/"+id,nombreParam))
+    return response;
+  }
+  deleteProyect=async(arg0: any)=> {
+    const response=await firstValueFrom(this.http.delete(this.apiUrl+"/delete/"+arg0))
+    return response;
+  }
 
   constructor(private http:HttpClient) { }
   

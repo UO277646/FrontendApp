@@ -43,19 +43,23 @@
 
 .fallos-table th:nth-child(2),
 .fallos-table td:nth-child(2) {
-  width: 20%; /* Nueva columna para información adicional */
+  width: 60%; /* Nueva columna para información adicional */
   border-right: 1px solid #ddd;
 }
 
 .fallos-table th:last-child,
 .fallos-table td:last-child {
-  width: 60%; /* Aumentado de 70% a 60% para detalles del fallo */
+  width: 20%; /* Aumentado de 70% a 60% para detalles del fallo */
 }
 
 .fallos-table tr:hover {
   background-color: #f1f1f1;
 }
-
+.boton-borrar{
+  display: flex;
+  width: full;
+  justify-content: center;
+}
 .fallos-table td {
   color: #555;
 }
@@ -97,12 +101,12 @@
 
   .fallos-table th:nth-child(2),
   .fallos-table td:nth-child(2) {
-    width: 30%;
+    width: 60%;
   }
 
   .fallos-table th:last-child,
   .fallos-table td:last-child {
-    width: 40%;
+    width: 10%;
   }
 }
 

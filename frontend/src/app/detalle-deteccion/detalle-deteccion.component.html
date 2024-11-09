@@ -1,26 +1,52 @@
 <div class="detalle-deteccion-container">
-    <h2 class="title">Detecciones del {{ fecha }}</h2>
-    
-    <table class="detecciones-table">
-      <thead>
-        <tr>
-          <th>Objeto</th>
-          <th>Coordenadas (X, Y)</th>
-          <th>Ancho</th>
-          <th>Alto</th>
-          <th>Confianza</th>
-        </tr>
-      </thead>
-      <tbody>
-    @for (deteccion of detecciones ;track $index){
-        <tr>
-          <td>{{ deteccion.objeto }}</td>
-          <td>{{ deteccion.x | number: '1.2-2' }} , {{ deteccion.y | number: '1.2-2' }}</td>
-          <td>{{ deteccion.weight | number: '1.2-2' }}</td>
-          <td>{{ deteccion.height | number: '1.2-2'}}</td>
-          <td>{{ deteccion.confidence | number: '1.2-2'}}</td>
-        </tr>
-    }
-      </tbody>
-    </table>
-  </div>
+  <h2 class="title">Detecciones del {{ fecha }}</h2>
+  <div class="datatable-filter">
+    <input
+      type="text"
+      placeholder="Buscar en todas las columnas"
+      (keyup)="updateFilter($event)"
+      class="filter-input"
+    />
+  </div> 
+  <ngx-datatable
+    class="material"
+    [rows]="filteredDetecciones"
+    [columns]="columns"
+    [columnMode]="ColumnMode.force"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [limit]="10"
+    [scrollbarH]="true"
+  >
+    <ngx-datatable-column name="Objeto" prop="objeto" [flexGrow]="2">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Coordenadas (X, Y)" [flexGrow]="2" [sortable]="false">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ row.x | number: '1.2-2' }}, {{ row.y | number: '1.2-2' }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Ancho" prop="weight" [flexGrow]="1">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value | number: '1.2-2' }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Alto" prop="height" [flexGrow]="1">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value | number: '1.2-2' }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Confianza" prop="confidence" [flexGrow]="1">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value | number: '1.2-2' }}
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>

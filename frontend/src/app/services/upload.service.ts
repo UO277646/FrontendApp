@@ -7,6 +7,7 @@ import { ObjetoImagenResponse } from '../file-upload/file-upload.component';
   providedIn: 'root'
 })
 export class UploadService {
+  
 
   constructor(private http:HttpClient) { }
   

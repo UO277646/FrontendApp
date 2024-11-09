@@ -30,8 +30,8 @@ export class LoginComponent {
   }
   async handleLogin(response:any){
     if(response){
-      console.log(response);
-      console.log(response.credential);
+      //console.log(response);
+      //console.log(response.credential);
       //Validate
       const result = await this.validatorService.validateToken(response.credential);
       localStorage.setItem('authToken', result.token);

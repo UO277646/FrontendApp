@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { UploadService } from '../services/upload.service';
+import { DeteccionService } from '../services/detecciones/deteccion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,11 @@ import { UploadService } from '../services/upload.service';
 })
 
 export class FileUploadComponent{
+  async deleteDeteccion(id: number) {
+    await this.detectionService.deleteDeteccion(id);
+    this.detectionResults.objetos = this.detectionResults.objetos.filter((item: { idDeteccion: number; }) => item.idDeteccion !== id);
+    
+  }
   detectionResults: any = [];
   foto:any;
   imgSrc:any;
@@ -26,7 +32,7 @@ export class FileUploadComponent{
   url!: string | ArrayBuffer | null;
   proyectoId: any=[]
 
-  constructor(private uploadService: UploadService,private route: ActivatedRoute) { }
+  constructor(private uploadService: UploadService,private detectionService:DeteccionService,private route: ActivatedRoute) { }
   
   onFileSelected(event: any): void {
     const files = event.target.files;
@@ -46,10 +52,13 @@ export class FileUploadComponent{
         this.url = reader.result; 
     }
     this.foto = event.target.files[0];
+    console.log(this.foto);
   }
   onUpload=async()=>{
+    this.detectionResults=[];
     const formData: FormData = new FormData();
     this.proyectoId=this.route.snapshot.paramMap.get('id');
+    console.log(this.foto.name);
     formData.append('image', this.foto, this.foto.name);
     formData.append("proyectId",this.proyectoId);
     console.log(this.proyectoId);

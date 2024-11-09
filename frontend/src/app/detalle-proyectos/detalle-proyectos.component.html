@@ -1,117 +1,200 @@
 <div class="main-container">
-  <div class="container mt-4">
-    <h3 class="mb-3">Detecciones del proyecto</h3>
+  <h3 class="mb-3">Detecciones del proyecto</h3>
   
-    <div class="mb-3">
-      <button class="btn btn-primary" (click)="navigateToDetect()">Realizar Nueva Detección</button>
-    </div>
-  
-    <div class="table-responsive">
-      <table class="table table-striped table-hover">
-        <thead class="table-primary">
-          <tr>
-            <th>Día</th>
-            <th>Número de Detecciones</th>
-            <th>Detalles</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (deteccion of detecciones; track deteccion.fechaCreacion) {
-            <tr>
-              <td>{{ deteccion.fechaCreacion }}</td>
-              <td>{{ deteccion.cantidad }}</td>
-              <td>
-                <button class="btn btn-sm btn-info" (click)="navigateToDetection(deteccion.fechaCreacion)">Detalles</button>
-              </td>
-            </tr>
-          } @empty {
-            <tr>
-              <td colspan="3" class="text-center">No hay detecciones disponibles.</td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
+  <div class="mb-3">
+    <button class="btn btn-primary" (click)="navigateToDetect()">Realizar Nueva Detección</button>
   </div>
 
+   <div class="datatable-filter">
+    <input
+      type="text"
+      placeholder="Buscar en todas las columnas"
+      (keyup)="updateFilter($event)"
+      class="filter-input"
+    />
+  </div> 
+
+  <ngx-datatable
+  class="material striped"
+
+    [rows]="filteredDetecciones"
+    [columns]="columns"
+    [columnMode]="ColumnMode.force"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [limit]="5"
+    
+  >
+  <ngx-datatable-column name="Día" prop="fechaCreacion">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <span class="date-cell">{{ value | date:'dd/MM/yyyy' }}</span>
+    </ng-template>
+  </ngx-datatable-column>
+    
+    <ngx-datatable-column name="Cantidad" prop="cantidad">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        <span class="quantity-cell">{{ value }}</span>
+      </ng-template>
+    </ngx-datatable-column>
+    
+    <ngx-datatable-column name="Detalles" prop="fechaCreacion" [sortable]="false">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button class="btn btn-info custom-button" (click)="navigateToDetection(row.fechaCreacion)">
+          Detalles
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+
+
+
+
 
   <div class="container mt-4">
-    <h3 class="mb-3">Restricciones del proyecto</h3>
+    <h3 class="mb-3">Comprobaciones automaticas</h3>
   
     <div class="mb-3">
-      <button class="btn btn-primary" (click)="showModal()">Crear Nueva Restricción</button>
+      <button class="btn btn-primary" (click)="showModal()">Crear comprobacion</button>
     </div>
-  
-    <div class="table-responsive">
-      <table class="table table-striped table-hover">
-        <thead class="table-primary">
-          <tr>
-            <th>ID Restricción</th>
-            <th>Objeto con Restricción</th>
-            <th>Desde</th>
-            <th>Hasta</th>
-            <th>Checkeada</th>
-            <th>Información</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (restriccion of restricciones; track restriccion.idRestriccion) {
-            <tr>
-              <td>{{ restriccion.idRestriccion }}</td>
-              <td>{{ restriccion.objeto }}</td>
-              <td>{{ restriccion.fechaDesde }}</td>
-              <td>{{ restriccion.fechaHasta }}</td>
-              
-                @if (restriccion.cumplida !== null) {
-                  @if (!restriccion.cumplida) {
-                    <td>
-                    <svg class="text-danger" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                    </svg>
-                    </td>
-                    <td>
-                      <button class="btn btn-sm btn-info" (click)="navigateToFallo(restriccion.idRestriccion)">Info</button>
-                    </td>
-                  } @else {
-                    <td>
-                    <svg class="text-success" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                      <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
-                    </svg>
-                  </td>
-                  <td>Sin fallos</td>
-                  }
-                }
-            </tr>
-          } @empty {
-            <tr>
-              <td colspan="6" class="text-center">No hay restricciones disponibles.</td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
+    <div class="datatable-filter">
+      <input
+        type="text"
+        placeholder="Buscar en todas las columnas"
+        (keyup)="updateFilter2($event)"
+        class="filter-input"
+      />
+    </div> 
+    <ngx-datatable
+    class="material striped"
+    [rows]="filteredRestricciones"
+    [columns]="columns2"
+    [columnMode]="ColumnMode.force"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [limit]="10"
+    [scrollbarH]="true"
+  >
+    <ngx-datatable-column name="ID" prop="idRestriccion" [resizeable]="true" [width]="80">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Objeto" prop="objeto" [resizeable]="true">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Desde" prop="fechaDesde" [resizeable]="true">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value | date:'dd/MM/yyyy' }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Hasta" prop="fechaHasta" [resizeable]="true">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value | date:'dd/MM/yyyy' }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Checkeada" prop="cumplida" [resizeable]="true">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        <ng-container *ngIf="value !== null">
+          <svg *ngIf="value===false" class="text-danger" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+          <svg *ngIf="value===true" class="text-success" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+          </svg>
+        </ng-container>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Información" prop="cumplida" [resizeable]="true">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <ng-container *ngIf="row.cumplida !== null">
+          <button *ngIf="!row.cumplida" class="btn btn-sm btn-info" (click)="navigateToFallo(row.idRestriccion)">
+            Info
+          </button>
+          <span *ngIf="row.cumplida">Sin fallos</span>
+        </ng-container>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Eliminar" prop="idRestriccion" [sortable]="false" [resizeable]="true"> 
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button class="btn btn-sm btn-danger" (click)="eliminarRestriccion(row.idRestriccion)">
+          Eliminar
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Editar" prop="cumplida" [sortable]="false" [resizeable]="true">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button *ngIf="row.cumplida === null; else noEdit" class="btn btn-sm btn-primary" (click)="editarRestriccion(row)">
+          Editar
+        </button>
+        <ng-template #noEdit>
+          <span>No editable</span>
+        </ng-template>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
   </div>
-</div>
+      
 <div id="createRestriccionModal" class="modal">
   <div class="modal-content">
     <span class="close" (click)="closeModal()">&times;</span>
-    <h2>Crear nueva restricción</h2>
+    <h2>{{ editRes ? 'Editar comprobación' : 'Crear nueva comprobación' }}</h2>
     <form [formGroup]="fb">
       <label for="objeto">Objeto con restricción:</label>
-      <input type="text" formControlName="objeto" id="objeto" placeholder="Introduce el objeto" required />
+      <select formControlName="objeto" id="objeto" required>
+        <option value="" disabled selected>Selecciona un objeto</option>
+        <option value="Vehiculo">Vehículo</option>
+        <option value="Pala">Pala</option>
+        <option value="Pallet">Pallet</option>
+        <option value="Cono">Cono</option>
+        <option value="Camion">Camión</option>
+        <option value="Tubo">Tubo</option>
+        <option value="Estacion">Estación</option>
+        <option value="Obrero">Obrero</option>
+        <option value="Montacargas">Montacargas</option>
+      </select>
       
       <label for="fechaDesde">Desde:</label>
-      <input type="date" formControlName="fechaDesde" id="fechaDesde" required />
+      <input type="date" [class.border-danger]="fb.controls['fechaDesde'].errors && fb.controls['fechaDesde'].touched" formControlName="fechaDesde" id="fechaDesde" required />
       
       <label for="fechaHasta">Hasta:</label>
-      <input type="date" formControlName="fechaHasta" id="fechaHasta" required />
+      <input type="date"  [class.border-danger]="fb.controls['fechaHasta'].errors && fb.controls['fechaHasta'].touched" formControlName="fechaHasta" id="fechaHasta" required />
       
       <label for="cantidadMin">Cantidad minima:</label>
-      <input type="number" formControlName="cantidadMin" id="cantidadMin" placeholder="Introduce la cantidad minima" required min="0"  />
+      <input type="number" formControlName="cantidadMin" [class.border-danger]="fb.controls['cantidadMin'].errors && fb.controls['cantidadMin'].touched" id="cantidadMin" placeholder="Introduce la cantidad minima" required min="0"  />
       <label for="cantidadMax">Cantidad maxima:</label>
-      <input type="number" formControlName="cantidadMax" id="cantidadMax" placeholder="Introduce la cantidad max" required min="0"/>
-      
-      <button type="submit" (click)="createRestriccion()">Crear</button>
+      <input type="number" formControlName="cantidadMax" [class.border-danger]="fb.controls['cantidadMax'].errors && fb.controls['cantidadMax'].touched" id="cantidadMax" placeholder="Introduce la cantidad max" required min="0"/>
+      <div class="form-check">
+        <input type="checkbox" formControlName="diaria" id="diaria" class="form-check-input" />
+        <label for="diaria" class="form-check-label">Diaria</label>
+      </div>
+      @if(errorMessage!=""){
+        <p class="text-danger">{{errorMessage}}</p>
+      }
+      <button (click)="editRes ? edit() : createRestriccion()">
+        {{ editRes ? 'Editar' : 'Crear' }}</button>
     </form>
+  </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show': showBorrarModal}" [ngStyle]="{'display': showBorrarModal ? 'block' : 'none'}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar eliminación</h5>
+        <button type="button" class="close" (click)="closeDelete()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>¿ Estás seguro de que quieres eliminar la comprobacion ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeDelete()">No</button>
+        <button type="button" class="btn btn-danger" (click)="deleteRestriccion(idRestriccion)">Sí, eliminar</button>
+      </div>
+    </div>
   </div>
 </div>
