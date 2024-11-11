@@ -2,7 +2,7 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { firstValueFrom, Observable, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { UploadService } from '../services/upload.service';
 import { DeteccionService } from '../services/detecciones/deteccion.service';
@@ -19,6 +19,21 @@ import { DeteccionService } from '../services/detecciones/deteccion.service';
 })
 
 export class FileUploadComponent{
+  async generatePDF() {
+  const res =await this.uploadService.getProcedurePDF(this.proyectoId);
+  this.binaryDownload(res, 'application/pdf');
+}
+ binaryDownload = (dataURI: any, type: string) => {
+  const newBlob = new Blob([dataURI], { type: type });
+  console.log(dataURI);
+  const a = document.createElement('a');
+  const url = window.URL.createObjectURL(newBlob);
+  a.href = url;
+  a.setAttribute('target', '_blank');
+  a.download = 'deteccion';
+  a.click();
+  }
+
   async deleteDeteccion(id: number) {
     await this.detectionService.deleteDeteccion(id);
     this.detectionResults.objetos = this.detectionResults.objetos.filter((item: { idDeteccion: number; }) => item.idDeteccion !== id);
