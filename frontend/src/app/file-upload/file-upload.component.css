@@ -34,13 +34,31 @@ th, td {
 }
 
 th {
-  background-color: #007bff;
-  color: white;
+  background-color: #1f2937; /* Gris casi negro */
+  color: #ffffff; /* Texto blanco */
   text-transform: uppercase;
   font-size: 14px;
   font-weight: bold;
+  border-bottom: 2px solid #2563eb; /* Línea inferior azul */
+}
+.btn-custom-gray {
+  color: #ffffff; /* Blanco para texto */
+  background-color: #4b5563; /* Gris oscuro neutro */
+  border-color: #374151; /* Gris más oscuro */
+  border-radius: 0.5rem; /* Bordes redondeados */
 }
 
+.btn-custom-gray:hover {
+  color: #ffffff;
+  background-color: #2563eb; /* Azul vibrante */
+  border-color: #1e40af; /* Azul más oscuro */
+  transform: scale(1.05); /* Pequeño efecto de agrandamiento */
+  transition: all 0.2s ease; /* Suaviza la transición */
+}
+
+.btn-custom-gray:focus, .btn-custom-gray.focus {
+  box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.5); /* Azul translúcido */
+}
 /* Colores alternos para filas */
 tr:nth-child(even) {
   background-color: #f2f2f2;

@@ -32,11 +32,12 @@
     </ng-template>
   </ngx-datatable-column>
     
-    <ngx-datatable-column name="Cantidad" prop="cantidad">
-      <ng-template let-value="value" ngx-datatable-cell-template>
-        <span class="quantity-cell">{{ value }}</span>
-      </ng-template>
-    </ngx-datatable-column>
+  <ngx-datatable-column name="Cantidad" prop="cantidad">
+    
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <span class="quantity-cell text-end w-100 d-block">{{ value }}</span>
+    </ng-template>
+  </ngx-datatable-column>
     
     <ngx-datatable-column name="Detalles" prop="fechaCreacion" [sortable]="false">
       <ng-template let-row="row" ngx-datatable-cell-template>
@@ -139,61 +140,92 @@
   </div>
       
 <div id="createRestriccionModal" class="modal">
-  <div class="modal-content">
-    <span class="close" (click)="closeModal()">&times;</span>
-    <h2>{{ editRes ? 'Editar comprobación' : 'Crear nueva comprobación' }}</h2>
-    <form [formGroup]="fb">
-      <label for="objeto">Objeto con restricción:</label>
-      <select formControlName="objeto" id="objeto" required>
-        <option value="" disabled selected>Selecciona un objeto</option>
-        <option value="Vehiculo">Vehículo</option>
-        <option value="Pala">Pala</option>
-        <option value="Pallet">Pallet</option>
-        <option value="Cono">Cono</option>
-        <option value="Camion">Camión</option>
-        <option value="Tubo">Tubo</option>
-        <option value="Estacion">Estación</option>
-        <option value="Obrero">Obrero</option>
-        <option value="Montacargas">Montacargas</option>
-      </select>
-      
-      <label for="fechaDesde">Desde:</label>
-      <input type="date" [class.border-danger]="fb.controls['fechaDesde'].errors && fb.controls['fechaDesde'].touched" formControlName="fechaDesde" id="fechaDesde" required />
-      
-      <label for="fechaHasta">Hasta:</label>
-      <input type="date"  [class.border-danger]="fb.controls['fechaHasta'].errors && fb.controls['fechaHasta'].touched" formControlName="fechaHasta" id="fechaHasta" required />
-      
-      <label for="cantidadMin">Cantidad minima:</label>
-      <input type="number" formControlName="cantidadMin" [class.border-danger]="fb.controls['cantidadMin'].errors && fb.controls['cantidadMin'].touched" id="cantidadMin" placeholder="Introduce la cantidad minima" required min="0"  />
-      <label for="cantidadMax">Cantidad maxima:</label>
-      <input type="number" formControlName="cantidadMax" [class.border-danger]="fb.controls['cantidadMax'].errors && fb.controls['cantidadMax'].touched" id="cantidadMax" placeholder="Introduce la cantidad max" required min="0"/>
-      <div class="form-check">
-        <input type="checkbox" formControlName="diaria" id="diaria" class="form-check-input" />
-        <label for="diaria" class="form-check-label">Diaria</label>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-light">
+        <h5 class="modal-title">{{ editRes ? 'Editar comprobación' : 'Crear nueva comprobación' }}</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
       </div>
-      @if(errorMessage!=""){
-        <p class="text-danger">{{errorMessage}}</p>
-      }
-      <button (click)="editRes ? edit() : createRestriccion()">
-        {{ editRes ? 'Editar' : 'Crear' }}</button>
-    </form>
-  </div>
+      <div class="modal-body">
+        <form [formGroup]="fb">
+          <div class="mb-3">
+            <label for="objeto" class="form-label">Objeto con restricción:</label>
+            <select formControlName="objeto" id="objeto" class="form-select" required>
+              <option value="" disabled selected>Selecciona un objeto</option>
+              <option value="Vehiculo">Vehículo</option>
+              <option value="Pala">Pala</option>
+              <option value="Pallet">Pallet</option>
+              <option value="Cono">Cono</option>
+              <option value="Camion">Camión</option>
+              <option value="Tubo">Tubo</option>
+              <option value="Estacion">Estación</option>
+              <option value="Obrero">Obrero</option>
+              <option value="Montacargas">Montacargas</option>
+              <option value="Barco">Barco</option>
+              <option value="Radiador">Radiador</option>
+              <option value="Conexion">Conexion</option>
+              <option value="Tanque">Tanque</option>
+            </select>
+          </div>
+          
+          <div class="mb-3">
+            <label for="fechaDesde" class="form-label">Desde:</label>
+            <input type="date" formControlName="fechaDesde" id="fechaDesde" class="form-control" [class.is-invalid]="fb.controls['fechaDesde'].errors && fb.controls['fechaDesde'].touched || fb.errors?.['fechasInvalidas']" required />
+          </div>
+          
+          <div class="mb-3">
+            <label for="fechaHasta" class="form-label">Hasta:</label>
+            <input type="date" formControlName="fechaHasta" id="fechaHasta" class="form-control" [class.is-invalid]="fb.controls['fechaHasta'].errors && fb.controls['fechaHasta'].touched || fb.errors?.['fechasInvalidas']" required />
+            <div *ngIf="fb.errors?.['fechasInvalidas']" class="invalid-feedback">
+              La fecha inicial debe ser menor que la fecha final.
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="cantidadMin" class="form-label">Cantidad mínima:</label>
+            <input type="number" formControlName="cantidadMin" id="cantidadMin" class="form-control" [class.is-invalid]="fb.controls['cantidadMin'].errors && fb.controls['cantidadMin'].touched" placeholder="Introduce la cantidad mínima" required min="0" />
+          </div>
+        
+          <div class="mb-3">
+            <label for="cantidadMax" class="form-label">Cantidad máxima:</label>
+            <input type="number" formControlName="cantidadMax" id="cantidadMax" class="form-control" [class.is-invalid]="fb.controls['cantidadMax'].errors && fb.controls['cantidadMax'].touched || fb.errors?.['maxMenorQueMin']" placeholder="Introduce la cantidad máxima" required min="0" />
+            <div *ngIf="fb.errors?.['maxMenorQueMin']" class="invalid-feedback">
+              La cantidad máxima debe ser mayor o igual que la cantidad mínima.
+            </div>
+          </div>
+        
+          <div class="mb-3 form-check">
+            <input type="checkbox" formControlName="diaria" id="diaria" class="form-check-input" />
+            <label for="diaria" class="form-check-label">Diaria</label>
+          </div>
+        
+          @if(errorMessage != "") {
+            <div class="alert alert-danger">{{errorMessage}}</div>
+          }
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+        <button type="button" class="btn btn-primary btn-lg" (click)="editRes ? edit() : createRestriccion()">
+          {{ editRes ? 'Editar' : 'Crear' }}
+        </button>
+      </div>
+    </div>
 </div>
-<div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show': showBorrarModal}" [ngStyle]="{'display': showBorrarModal ? 'block' : 'none'}">
-  <div class="modal-dialog" role="document">
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" [ngClass]="{'show': showBorrarModal}" [ngStyle]="{'display': showBorrarModal ? 'block' : 'none'}">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Confirmar eliminación</h5>
-        <button type="button" class="close" (click)="closeDelete()">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" (click)="closeDelete()" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>¿ Estás seguro de que quieres eliminar la comprobacion ?</p>
+        <p>¿Estás seguro de que quieres eliminar la comprobación?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="closeDelete()">No</button>
-        <button type="button" class="btn btn-custom-gray" (click)="deleteRestriccion(idRestriccion)">Sí, eliminar</button>
+        <button type="button" class="btn btn-danger" (click)="deleteRestriccion(idRestriccion)">Sí, eliminar</button>
       </div>
     </div>
   </div>

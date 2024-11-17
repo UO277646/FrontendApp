@@ -1,5 +1,5 @@
 <div class="detalle-deteccion-container">
-  <h2 class="title">Detecciones del {{ fecha }}</h2>
+  <h3 class="mb-3">Detecciones del {{ fecha }}</h3>
   <div class="datatable-filter">
     <input
       type="text"
@@ -9,7 +9,7 @@
     />
   </div> 
   <ngx-datatable
-    class="material"
+    class="material striped"
     [rows]="filteredDetecciones"
     [columns]="columns"
     [columnMode]="ColumnMode.force"
@@ -27,25 +27,25 @@
 
     <ngx-datatable-column name="Coordenadas (X, Y)" [flexGrow]="2" [sortable]="false">
       <ng-template let-row="row" ngx-datatable-cell-template>
-        {{ row.x | number: '1.2-2' }}, {{ row.y | number: '1.2-2' }}
+        <span class="quantity-cell text-end w-100 d-block">{{ row.x | number: '1.2-2' }}, {{ row.y | number: '1.2-2' }}</span>
       </ng-template>
     </ngx-datatable-column>
 
     <ngx-datatable-column name="Ancho" prop="weight" [flexGrow]="1">
       <ng-template let-value="value" ngx-datatable-cell-template>
-        {{ value | number: '1.2-2' }}
+        <span class="quantity-cell text-end w-100 d-block">{{ value | number: '1.2-2' }}</span>
       </ng-template>
     </ngx-datatable-column>
 
     <ngx-datatable-column name="Alto" prop="height" [flexGrow]="1">
       <ng-template let-value="value" ngx-datatable-cell-template>
-        {{ value | number: '1.2-2' }}
+        <span class="quantity-cell text-end w-100 d-block">{{ value | number: '1.2-2' }}</span>
       </ng-template>
     </ngx-datatable-column>
 
     <ngx-datatable-column name="Confianza" prop="confidence" [flexGrow]="1">
       <ng-template let-value="value" ngx-datatable-cell-template>
-        {{ value | number: '1.2-2' }}
+        <span class="quantity-cell text-end w-100 d-block">{{ value | number: '1.2-2' }}</span>
       </ng-template>
     </ngx-datatable-column>
   </ngx-datatable>

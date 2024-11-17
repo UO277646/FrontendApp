@@ -16,7 +16,7 @@ import { RestriccionService } from '../services/restricciones/restriccion.servic
 export class DetalleProyectosComponent {
   filteredRestricciones: any;
   async edit() {
-  if(!this.checkErrors(this.fb)){
+  if(!this.checkErrors(this.fb) && this.fb.valid){
     this.fb.controls["proyectoId"].setValue(this.route.snapshot.paramMap.get('id'));
     const res=await this.restriccionService.editRestriccion(this.idRestriccion,this.fb.value);
     if(res){
@@ -27,7 +27,7 @@ export class DetalleProyectosComponent {
       this.load();
     } 
   }else{
-    this.errorMessage="Complete los campos vacios"
+    this.errorMessage="Algun campo vacio o erroneo"
   }
 }
 errorMessage: any="";
@@ -63,6 +63,9 @@ idRestriccion:any;
 eliminarRestriccion(arg0: any) {
   this.idRestriccion=arg0;
   this.showBorrarModal=true;
+  console.log(this.idRestriccion);
+  console.log(this.showBorrarModal);
+
 }
 editarRestriccion(arg0: any) {
   this.editRes=true;
@@ -150,6 +153,8 @@ editarRestriccion(arg0: any) {
         modal!.style.display = "block";
       }
       closeModal(){
+        this.editRes=false;
+        this.fb=this.formService.getRestrictionForm()
         const modal = document.getElementById("createRestriccionModal");
         modal!.style.display = "none";
       }
@@ -163,7 +168,7 @@ editarRestriccion(arg0: any) {
           this.load();
         }
       }else{
-        this.errorMessage="Complete los campos vacios";
+        this.errorMessage="Algun campo vacio o erroneo";
       }
       }
       

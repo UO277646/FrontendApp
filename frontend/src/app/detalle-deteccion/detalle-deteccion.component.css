@@ -1,28 +1,36 @@
 .detalle-deteccion-container {
-    width: 100%;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
-    max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #2c3e50;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 1.8em;
+}
+
+@media (max-width: 768px) {
+  .detecciones-table th, .detecciones-table td {
+    font-size: 12px;
+    padding: 8px 10px;
   }
-  
-  .title {
-    text-align: center;
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  
-  
-  @media (max-width: 768px) {
-    .detecciones-table th, .detecciones-table td {
-      font-size: 12px;
-      padding: 8px 10px;
-    }
-  }
+}
 
 
 /* Pagination */
@@ -30,16 +38,16 @@
 
 /* Additional styles to override ngx-datatable defaults */
 ::ng-deep .ngx-datatable.material .datatable-header .datatable-header-cell {
-  font-weight: bold;
-  color: #333;
-  font-size: 15px;
+font-weight: bold;
+color: #333;
+font-size: 15px;
 }
 ::ng-deep .ngx-datatable.material .datatable-body .datatable-body-row {
-  border-bottom: 1px solid #ddd;
+border-bottom: 1px solid #ddd;
 }
 
 ::ng-deep .ngx-datatable.material .datatable-body .datatable-body-cell {
-  padding: 8px;
+padding: 8px;
 }
 
 
@@ -48,39 +56,39 @@
 
 /* Filter Input Styles */
 .datatable-filter {
-  margin-bottom: 20px;
+margin-bottom: 20px;
 }
 
 .filter-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
+width: 100%;
+padding: 10px;
+border: 1px solid #ddd;
+border-radius: 6px;
+font-size: 16px;
+transition: border-color 0.3s ease;
 }
 
 .filter-input:focus {
-  border-color: #3498db;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
+border-color: #3498db;
+outline: none;
+box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .main-container {
-    padding: 15px;
-  }
-  
-  .btn {
-    width: 100%;
-    margin-bottom: 15px;
-  }
+.main-container {
+  padding: 15px;
+}
 
-  .ngx-datatable.material .datatable-header .datatable-header-cell,
-  .ngx-datatable.material .datatable-body .datatable-body-cell {
-    font-size: 0.875rem;
-  }
+.btn {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.ngx-datatable.material .datatable-header .datatable-header-cell,
+.ngx-datatable.material .datatable-body .datatable-body-cell {
+  font-size: 0.875rem;
+}
 }
 
 @media (max-width: 576px) {

@@ -36,7 +36,7 @@ export class ProyectosScrollableComponent {
       this.loadProyects();
     } 
   }else{
-    this.errorMessage="Complete los campos vacios"
+    this.errorMessage="Algun campo vacio o erroneo"
   }
 }
   async deleteProyecto(arg0: any) {
@@ -102,7 +102,7 @@ setProyectoForDelete(arg0: any) {
         this.loadProyects();
       } 
     }else{
-      this.errorMessage="Complete los campos vacios"
+      this.errorMessage="Algun campo vacio o erroneo"
     }
     
   }
