@@ -1,48 +1,51 @@
 <div class="project-container">
-      <button class="btn btn-primary btn-sm" (click)="showModal()" >Nuevo proyecto</button>
-      <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                  <thead class="table-primary">
-            <tr>
-                  <th>
-                        Nombre
-                  </th>
-                  <th>
-                        Fecha
-                  </th>
-                  <th>
-                        Detalles
-                  </th>
-                  <th>
-                        Editar
-                  </th>
-                  <th>
-                        Borrar
-                  </th>
+      <button class="btn-custom-gray btn-sm d-flex gap-2" (click)="showModal()" ><img src="assets/icons/crear.svg" alt="icono detalles" style="width: 1.25rem; height: 1.25rem;">Nuevo proyecto</button>
+      <ngx-datatable
+  class="material striped"
+  [rows]="proyectos"
+  [columns]="columns"
+  [columnMode]="ColumnMode.force"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [rowHeight]="'auto'"
+  [limit]="5"
+>
+  <ngx-datatable-column name="Nombre" prop="nombre">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      {{ value }}
+    </ng-template>
+  </ngx-datatable-column>
 
-            </tr>
-            </thead>
-            <tbody>
-            @for (proyecto of proyectos ;track $index){
-                  <tr>
-                        <td>{{ proyecto.nombre }}</td>
-                        <td>{{ proyecto.fechaCreacion }}</td>
-                        <td><button class="btn btn-info btn-sm" (click)="navigateToProject(proyecto.idProyecto)">Detalles</button></td>  
-                        <td>
-                              <button class="btn btn-warning" (click)="editProyecto(proyecto)">
-                              Editar
-                              </button>
-                        </td>
-                        <td>
-                              <button class="btn btn-danger" (click)="setProyectoForDelete( proyecto.idProyecto)">
-                              Borrar
-                              </button>
-                        </td>
-                  </tr> 
-            }
-            </tbody>
-            </table>
-      </div>
+  <ngx-datatable-column name="Fecha" prop="fechaCreacion">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      {{ value | date:'dd/MM/yyyy' }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Detalles" [sortable]="false">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <button class="btn btn-custom-gray btn-sm" (click)="navigateToProject(row.idProyecto)">
+        <img src="assets/icons/details.svg" alt="icono detalles" style="width: 1.25rem; height: 1.25rem;">
+      </button>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Editar" [sortable]="false">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <button class="btn btn-custom-gray" (click)="editProyecto(row)">
+        <img src="assets/icons/edit.svg" alt="icono editar" style="width: 1.25rem; height: 1.25rem;">
+      </button>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Borrar" [sortable]="false">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <button class="btn btn-custom-gray" (click)="setProyectoForDelete(row.idProyecto)">
+        <img src="assets/icons/delete-white.svg" alt="icono borrar" style="width: 1.25rem; height: 1.25rem;">
+      </button>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
 </div>
 <div id="createProyModal" class="modal">
       <div class="modal-content">

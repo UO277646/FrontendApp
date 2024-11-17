@@ -2,13 +2,15 @@
   <div class="w-100 px-3">
     <div class="row d-flex justify-content-between">
       <div class="col-12 col-lg-6 mb-3 mb-lg-0">
-        <h1 class="main-title">{{title}}</h1>
+        <h1 class="main-title d-flex align-items-center gap-2"> <img src="assets/icons/logo.svg" alt="icono logo" style="width: 2.75rem; height: 2.75rem;"> {{title}}</h1>
         <p class="subtitle mb-0">{{subtitle}}</p>
       </div>
       <div class="col-12 col-lg-6 d-flex justify-content-end align-items-center">
         <ul class="nav-list d-flex mb-0">
           <li class="nav-item">
-            <a href="proyectos" routerLinkActive="active" class="text-white mx-2">Proyectos</a>
+            <a href="proyectos" routerLinkActive="active" class="text-white mx-2 d-flex align-items-center gap-2">
+              <img  src="assets/icons/proyectos.svg" alt="icono proyectos" style="width: 1.5rem; height: 1.5rem;">Proyectos
+            </a>
           </li>
           <!-- @if(projectId){
             <li class="nav-item">
@@ -18,12 +20,10 @@
           </li>
             } -->
           
-          <li class="nav-item">
-            <button (click)="signOut()" class="d-flex align-items-center justify-content-center px-4 py-2 btn btn-danger rounded transition">              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-              </svg>
-              Log Out
-            </button>
+          <li class="nav-item"> 
+            <a (click)="signOut()" href="/" class="text-white mx-2 d-flex align-items-center gap-2 ">              
+              <img  src="assets/icons/logout.svg" alt="icono borrar" style="width: 1.25rem; height: 1.25rem;">  Log Out
+            </a>
           </li>
         </ul>
       </div>

@@ -1,19 +1,29 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { ProjectService } from '../../services/projectsServices/project.service';
 import { FormArray, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormProjectService } from '../../services/form/form-project.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ModalBorrarComponent } from "../../modal-borrar/modal-borrar.component";
+import { ColumnMode, DatatableComponent, NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-proyectos-scrollable',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, ModalBorrarComponent],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule,NgxDatatableModule],
   templateUrl: './proyectos-scrollable.component.html',
   styleUrl: './proyectos-scrollable.component.css'
 })
 export class ProyectosScrollableComponent {
+  @ViewChild(DatatableComponent) table!: DatatableComponent;
+  ColumnMode = ColumnMode;
+  columns = [
+    { prop: 'nombre', name: 'Nombre' },
+    { prop: 'fechaCreacion', name: 'Fecha' },
+    { name: 'Detalles' },
+    { name: 'Editar' },
+    { name: 'Borrar' }
+  ];
   async edit() {
   if(!this.checkErrors(this.fb)){
     this.fb.controls["user"].setValue(this.email);

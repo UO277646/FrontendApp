@@ -2,7 +2,7 @@
   <h3 class="mb-3">Detecciones del proyecto</h3>
   
   <div class="mb-3">
-    <button class="btn btn-primary" (click)="navigateToDetect()">Realizar Nueva Detección</button>
+    <button class="btn btn-custom-gray" (click)="navigateToDetect()">Realizar Nueva Detección</button>
   </div>
 
    <div class="datatable-filter">
@@ -40,9 +40,9 @@
     
     <ngx-datatable-column name="Detalles" prop="fechaCreacion" [sortable]="false">
       <ng-template let-row="row" ngx-datatable-cell-template>
-        <button class="btn btn-info custom-button" (click)="navigateToDetection(row.fechaCreacion)">
-          Detalles
-        </button>
+        <button class="btn btn-custom-gray custom-button" (click)="navigateToDetection(row.fechaCreacion)">
+          <img src="assets/icons/details.svg" alt="icono borrar" style="width: 1.25rem; height: 1.25rem;">
+                        </button>
       </ng-template>
     </ngx-datatable-column>
   </ngx-datatable>
@@ -55,7 +55,7 @@
     <h3 class="mb-3">Comprobaciones automaticas</h3>
   
     <div class="mb-3">
-      <button class="btn btn-primary" (click)="showModal()">Crear comprobacion</button>
+      <button class="btn btn-custom-gray" (click)="showModal()">Crear comprobacion</button>
     </div>
     <div class="datatable-filter">
       <input
@@ -111,8 +111,8 @@
     <ngx-datatable-column name="Información" prop="cumplida" [resizeable]="true">
       <ng-template let-row="row" ngx-datatable-cell-template>
         <ng-container *ngIf="row.cumplida !== null">
-          <button *ngIf="!row.cumplida" class="btn btn-sm btn-info" (click)="navigateToFallo(row.idRestriccion)">
-            Info
+          <button *ngIf="!row.cumplida" class="btn btn-sm btn-custom-gray" (click)="navigateToFallo(row.idRestriccion)">
+            <img src="assets/icons/details.svg" alt="icono borrar" style="width: 1.25rem; height: 1.25rem;">
           </button>
           <span *ngIf="row.cumplida">Sin fallos</span>
         </ng-container>
@@ -120,16 +120,16 @@
     </ngx-datatable-column>
     <ngx-datatable-column name="Eliminar" prop="idRestriccion" [sortable]="false" [resizeable]="true"> 
       <ng-template let-row="row" ngx-datatable-cell-template>
-        <button class="btn btn-sm btn-danger" (click)="eliminarRestriccion(row.idRestriccion)">
-          Eliminar
-        </button>
+        <button class="btn btn-sm btn-custom-gray" (click)="eliminarRestriccion(row.idRestriccion)">
+          <img src="assets/icons/delete-white.svg" alt="icono borrar" style="width: 1.25rem; height: 1.25rem;">
+                      </button>
       </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Editar" prop="cumplida" [sortable]="false" [resizeable]="true">
       <ng-template let-row="row" ngx-datatable-cell-template>
-        <button *ngIf="row.cumplida === null; else noEdit" class="btn btn-sm btn-primary" (click)="editarRestriccion(row)">
-          Editar
-        </button>
+        <button *ngIf="row.cumplida === null; else noEdit" class="btn btn-sm btn-custom-gray" (click)="editarRestriccion(row)">
+          <img src="assets/icons/edit.svg" alt="icono borrar" style="width: 1.25rem; height: 1.25rem;">
+                              </button>
         <ng-template #noEdit>
           <span>No editable</span>
         </ng-template>
@@ -193,7 +193,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="closeDelete()">No</button>
-        <button type="button" class="btn btn-danger" (click)="deleteRestriccion(idRestriccion)">Sí, eliminar</button>
+        <button type="button" class="btn btn-custom-gray" (click)="deleteRestriccion(idRestriccion)">Sí, eliminar</button>
       </div>
     </div>
   </div>
