@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { loginGuard } from './guards/loginGuard.guard';
 import { FallosComponent } from './fallos/fallos.component';
 import { auth } from './guards/authGuard.guard';
+import { DetalleComprobacionesComponent } from './detalle-comprobaciones/detalle-comprobaciones.component';
 
 export const routes: Routes = [
     {path:"",component:LoginComponent},
@@ -15,6 +16,7 @@ export const routes: Routes = [
     {path:"proyecto/:id",canActivate:[loginGuard,auth],
         children:[
             {path:"",component:DetalleProyectosComponent,canActivate:[loginGuard,auth]},
+            {path:"restrict",component:DetalleComprobacionesComponent,canActivate:[loginGuard,auth]},
             {path:"fallos/:idRec",component:FallosComponent,canActivate:[loginGuard,auth]},
             {path:"detect",component:FileUploadComponent,canActivate:[loginGuard,auth]},
             {path:"detections/:fecha",component:DetalleDeteccionComponent,canActivate:[loginGuard,auth]}

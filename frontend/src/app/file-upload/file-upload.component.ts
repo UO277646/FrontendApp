@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, Observable, tap } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UploadService } from '../services/upload.service';
 import { DeteccionService } from '../services/detecciones/deteccion.service';
 
@@ -19,6 +19,11 @@ import { DeteccionService } from '../services/detecciones/deteccion.service';
 })
 
 export class FileUploadComponent{
+  navigateToParent() {
+    const currentUrl = this.router.url;
+    const parentUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
+    this.router.navigate([parentUrl]);
+  }
   async generatePDF() {
   const res =await this.uploadService.getProcedurePDF(this.proyectoId);
   this.binaryDownload(res, 'application/pdf');
@@ -47,7 +52,7 @@ export class FileUploadComponent{
   url!: string | ArrayBuffer | null;
   proyectoId: any=[]
 
-  constructor(private uploadService: UploadService,private detectionService:DeteccionService,private route: ActivatedRoute) { }
+  constructor(private uploadService: UploadService,private detectionService:DeteccionService,private route: ActivatedRoute,private router: Router) { }
   
   onFileSelected(event: any): void {
     const files = event.target.files;

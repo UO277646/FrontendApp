@@ -1,0 +1,184 @@
+<div class="main-container">
+    <div class="container mt-4">
+        <h3 class="mb-3">Comprobaciones automaticas</h3>
+        <div class="botones">
+            <div class="boton mb-3">
+                <button class="btn btn-custom-gray d-flex gap-2 align-items-center" (click)="showModal()"><img src="assets/icons/comprobacion.svg" alt="icono volver" style="width: 1.25rem; height: 1.25rem;">Crear comprobación</button>
+            </div>
+            <div class="boton mb-3">
+                <button class="btn btn-custom-gray d-flex gap-2 align-items-center" (click)="navigateToParent()"><img src="assets/icons/volver.svg" alt="icono volver" style="width: 1.25rem; height: 1.25rem;">Volver
+                </button>
+            </div>
+        </div>
+        <div class="datatable-filter">
+          <input
+            type="text"
+            placeholder="Buscar en todas las columnas"
+            (keyup)="updateFilter2($event)"
+            class="filter-input"
+          />
+        </div> 
+        <ngx-datatable
+        class="material striped"
+        [rows]="filteredRestricciones"
+        [columns]="columns2"
+        [columnMode]="ColumnMode.force"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="10"
+        [scrollbarH]="true"
+      >
+        <ngx-datatable-column name="ID" prop="idRestriccion" [resizeable]="true" [width]="80">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Objeto" prop="objeto" [resizeable]="true">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Desde" prop="fechaDesde" [resizeable]="true">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value | date:'dd/MM/yyyy' }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Hasta" prop="fechaHasta" [resizeable]="true">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value | date:'dd/MM/yyyy' }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Checkeada" prop="cumplida" [resizeable]="true">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <ng-container *ngIf="value !== null">
+              <svg *ngIf="value===false" class="text-danger" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+              <svg *ngIf="value===true" class="text-success" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+              </svg>
+            </ng-container>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Información" prop="cumplida" [resizeable]="true">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <ng-container *ngIf="row.cumplida !== null">
+              <button *ngIf="!row.cumplida" class="btn btn-sm btn-custom-gray" (click)="navigateToFallo(row.idRestriccion)">
+                <img src="assets/icons/details.svg" alt="icono borrar" style="width: 1.25rem; height: 1.25rem;">
+              </button>
+              <span *ngIf="row.cumplida">Sin fallos</span>
+            </ng-container>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Eliminar" prop="idRestriccion" [sortable]="false" [resizeable]="true"> 
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <button class="btn btn-sm btn-custom-gray" (click)="eliminarRestriccion(row.idRestriccion)">
+              <img src="assets/icons/delete-white.svg" alt="icono borrar" style="width: 1.25rem; height: 1.25rem;">
+                          </button>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Editar" prop="cumplida" [sortable]="false" [resizeable]="true">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <button *ngIf="row.cumplida === null; else noEdit" class="btn btn-sm btn-custom-gray" (click)="editarRestriccion(row)">
+              <img src="assets/icons/edit.svg" alt="icono borrar" style="width: 1.25rem; height: 1.25rem;">
+                                  </button>
+            <ng-template #noEdit>
+              <span>No editable</span>
+            </ng-template>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+      </div>
+          
+    <div id="createRestriccionModal" class="modal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-light">
+            <h5 class="modal-title">{{ editRes ? 'Editar comprobación' : 'Crear nueva comprobación' }}</h5>
+            <button type="button" class="btn-close" (click)="closeModal()"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="fb">
+              <div class="mb-3">
+                <label for="objeto" class="form-label">Objeto con restricción:</label>
+                <select formControlName="objeto" id="objeto" class="form-select" required>
+                  <option value="" disabled selected>Selecciona un objeto</option>
+                  <option value="Vehiculo">Vehículo</option>
+                  <option value="Pala">Pala</option>
+                  <option value="Pallet">Pallet</option>
+                  <option value="Cono">Cono</option>
+                  <option value="Camion">Camión</option>
+                  <option value="Tubo">Tubo</option>
+                  <option value="Estacion">Estación</option>
+                  <option value="Obrero">Obrero</option>
+                  <option value="Montacargas">Montacargas</option>
+                  <option value="Barco">Barco</option>
+                  <option value="Radiador">Radiador</option>
+                  <option value="Conexion">Conexion</option>
+                  <option value="Tanque">Tanque</option>
+                </select>
+              </div>
+              
+              <div class="mb-3">
+                <label for="fechaDesde" class="form-label">Desde:</label>
+                <input type="date" formControlName="fechaDesde" id="fechaDesde" class="form-control" [class.is-invalid]="fb.controls['fechaDesde'].errors && fb.controls['fechaDesde'].touched || fb.errors?.['fechasInvalidas']" required />
+              </div>
+              
+              <div class="mb-3">
+                <label for="fechaHasta" class="form-label">Hasta:</label>
+                <input type="date" formControlName="fechaHasta" id="fechaHasta" class="form-control" [class.is-invalid]="fb.controls['fechaHasta'].errors && fb.controls['fechaHasta'].touched || fb.errors?.['fechasInvalidas']" required />
+                <div *ngIf="fb.errors?.['fechasInvalidas']" class="invalid-feedback">
+                  La fecha inicial debe ser menor que la fecha final.
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label for="cantidadMin" class="form-label">Cantidad mínima:</label>
+                <input type="number" formControlName="cantidadMin" id="cantidadMin" class="form-control" [class.is-invalid]="fb.controls['cantidadMin'].errors && fb.controls['cantidadMin'].touched" placeholder="Introduce la cantidad mínima" required min="0" />
+              </div>
+            
+              <div class="mb-3">
+                <label for="cantidadMax" class="form-label">Cantidad máxima:</label>
+                <input type="number" formControlName="cantidadMax" id="cantidadMax" class="form-control" [class.is-invalid]="fb.controls['cantidadMax'].errors && fb.controls['cantidadMax'].touched || fb.errors?.['maxMenorQueMin']" placeholder="Introduce la cantidad máxima" required min="0" />
+                <div *ngIf="fb.errors?.['maxMenorQueMin']" class="invalid-feedback">
+                  La cantidad máxima debe ser mayor o igual que la cantidad mínima.
+                </div>
+              </div>
+            
+              <div class="mb-3 form-check">
+                <input type="checkbox" formControlName="diaria" id="diaria" class="form-check-input" />
+                <label for="diaria" class="form-check-label">Diaria</label>
+              </div>
+            
+              @if(errorMessage != "") {
+                <div class="alert alert-danger">{{errorMessage}}</div>
+              }
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+            <button type="button" class="btn btn-primary btn-lg" (click)="editRes ? edit() : createRestriccion()">
+              {{ editRes ? 'Editar' : 'Crear' }}
+            </button>
+          </div>
+        </div>
+    </div>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" [ngClass]="{'show': showBorrarModal}" [ngStyle]="{'display': showBorrarModal ? 'block' : 'none'}">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmar eliminación</h5>
+            <button type="button" class="btn-close" (click)="closeDelete()" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>¿Estás seguro de que quieres eliminar la comprobación?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeDelete()">No</button>
+            <button type="button" class="btn btn-danger" (click)="deleteRestriccion(idRestriccion)">Sí, eliminar</button>
+          </div>
+        </div>
+      </div>
+</div>

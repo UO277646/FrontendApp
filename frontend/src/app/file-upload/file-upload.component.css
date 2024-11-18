@@ -5,8 +5,6 @@ body {
   background-color: #F2F1F0;
 }
 
-
-
 h1 {
   color: #333;
   text-align: center;
@@ -46,6 +44,10 @@ th {
   background-color: #4b5563; /* Gris oscuro neutro */
   border-color: #374151; /* Gris más oscuro */
   border-radius: 0.5rem; /* Bordes redondeados */
+  display: block;
+  margin: 20px auto;
+  padding: 12px 24px;
+  cursor: pointer;
 }
 
 .btn-custom-gray:hover {
@@ -57,6 +59,24 @@ th {
 }
 
 .btn-custom-gray:focus, .btn-custom-gray.focus {
+  box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.5); /* Azul translúcido */
+}
+.btn-custom-gray-borrar {
+  color: #ffffff; /* Blanco para texto */
+  background-color: #4b5563; /* Gris oscuro neutro */
+  border-color: #374151; /* Gris más oscuro */
+  border-radius: 0.5rem; /* Bordes redondeados */
+}
+
+.btn-custom-gray-borrar:hover {
+  color: #ffffff;
+  background-color: #2563eb; /* Azul vibrante */
+  border-color: #1e40af; /* Azul más oscuro */
+  transform: scale(1.05); /* Pequeño efecto de agrandamiento */
+  transition: all 0.2s ease; /* Suaviza la transición */
+}
+
+.btn-custom-gray-borrar:focus, .btn-custom-gray.focus {
   box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.5); /* Azul translúcido */
 }
 /* Colores alternos para filas */
@@ -81,10 +101,10 @@ input[type="file"] {
   margin: 0 auto;
   padding: 15px;
   width: 70%;
-  border: 3px dashed #A39D92;
+  border: 3px dashed #4b5563;
   border-radius: 10px;
   background-color: #F5F5F5;
-  color: #423e3c;
+  color: #423c3c;
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s, border-color 0.3s;
@@ -103,19 +123,7 @@ input[type="file"]::before {
   font-size: 1.2em;
 }
 
-.btn-p {
-  display: block;
-  margin: 20px auto;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  background-color: #A39D92;
-  color: #ffffff;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, box-shadow 0.3s;
-}
+
 
 .btn-p:hover {
   background-color: #8D8D8D;
