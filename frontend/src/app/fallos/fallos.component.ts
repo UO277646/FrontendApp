@@ -13,7 +13,7 @@ export class FallosComponent {
   navigateToParent() {
     const currentUrl = this.router.url;
     const parentUrl = currentUrl.replace(/\/fallos\/.*$/, '');
-    this.router.navigate([parentUrl]);
+    this.router.navigate([parentUrl+"/restrict"]);
   }
   async deleteFallo(arg0: any) {
     await this.fallosService.deleteFallo(arg0);
