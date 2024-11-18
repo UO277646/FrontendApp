@@ -73,7 +73,24 @@ border-color: #3498db;
 outline: none;
 box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
 }
+.btn-custom-gray {
+  color: #ffffff; /* Blanco para texto */
+  background-color: #4b5563; /* Gris oscuro neutro */
+  border-color: #374151; /* Gris más oscuro */
+  border-radius: 0.5rem; /* Bordes redondeados */
+}
 
+.btn-custom-gray:hover {
+  color: #ffffff;
+  background-color: #2563eb; /* Azul vibrante */
+  border-color: #1e40af; /* Azul más oscuro */
+  transform: scale(1.05); /* Pequeño efecto de agrandamiento */
+  transition: all 0.2s ease; /* Suaviza la transición */
+}
+
+.btn-custom-gray:focus, .btn-custom-gray.focus {
+  box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.5); /* Azul translúcido */
+}
 /* Responsive Design */
 @media (max-width: 768px) {
 .main-container {
