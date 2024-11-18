@@ -26,6 +26,7 @@ export class DetalleDeteccionComponent {
   proyectoId: any=[]
   fecha:any=[]
   filteredDetecciones: any;
+  url: any;
   constructor(private route: ActivatedRoute, private deteccionService: DeteccionService,private router: Router){
 
   }
@@ -57,6 +58,8 @@ export class DetalleDeteccionComponent {
     this.fecha = this.route.snapshot.paramMap.get('fecha');
 
     const res= await this.deteccionService.getDeteccionesDia(this.proyectoId,this.fecha);
+    const base64Image = await this.deteccionService.getImagenDia(this.proyectoId, this.fecha);
+    this.url = 'data:image/png;base64,' + base64Image;
     if(res){
       this.detecciones=res;
       this.filteredDetecciones=this.detecciones;

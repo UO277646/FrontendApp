@@ -5,9 +5,9 @@
       <table class="fallos-table">
         <thead>
           <tr>
-            <th>Fallo ID</th>
-            <th>Detalles</th>
-            <th>Borrar</th>
+            <th class="th-gris">Fallo ID</th>
+            <th class="th-gris">Detalles</th>
+            <th class="th-gris">Borrar</th>
           </tr>
         </thead>
         <tbody>
@@ -18,9 +18,9 @@
             
             <td>
               <div class="boton-borrar">
-              <button class="btn btn-danger" (click)="deleteFallo( fallo.falloId)">
-                Borrar
-              </button>
+              <button class="btn btn-custom-gray" (click)="deleteFallo( fallo.falloId)">
+                <img src="assets/icons/delete-white.svg" alt="icono borrar" style="width: 1.25rem; height: 1.25rem;">
+                      </button>
               </div>
             </td>
             </tr>

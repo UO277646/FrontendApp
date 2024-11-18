@@ -17,6 +17,7 @@ body {
 .datatable-header-cell-label{
   font-size: 30px !important;
 }
+
 h3 {
   color: #2c3e50;
   border-bottom: 3px solid #3498db;
@@ -26,7 +27,9 @@ h3 {
   font-weight: 600;
   font-size: 1.8em;
 }
-
+::ng-deep .ngx-datatable.material .datatable-body .datatable-body-cell {
+  border-right: 1px solid #e0e0e0; /* Light grey border for body cells */
+}
 /* ngx-datatable Styles */
 .ngx-datatable.material {
   border-radius: 8px;
@@ -108,7 +111,24 @@ h3 {
   color: #333;
   font-size: 15px;
 }
+.btn-custom-gray {
+  color: #ffffff; /* Blanco para texto */
+  background-color: #4b5563; /* Gris oscuro neutro */
+  border-color: #374151; /* Gris más oscuro */
+  border-radius: 0.5rem; /* Bordes redondeados */
+}
 
+.btn-custom-gray:hover {
+  color: #ffffff;
+  background-color: #2563eb; /* Azul vibrante */
+  border-color: #1e40af; /* Azul más oscuro */
+  transform: scale(1.05); /* Pequeño efecto de agrandamiento */
+  transition: all 0.2s ease; /* Suaviza la transición */
+}
+
+.btn-custom-gray:focus, .btn-custom-gray.focus {
+  box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.5); /* Azul translúcido */
+}
 ::ng-deep .ngx-datatable.material .datatable-body .datatable-body-row {
   border-bottom: 1px solid #ddd;
 }
