@@ -1,5 +1,14 @@
 <div class="detalle-deteccion-container">
   <h3 class="mb-3">Detecciones del {{ fecha }}</h3>
+  <div class="row mb-4">
+    <div class="col-12">
+      @if (url) {
+        <div id="imageContainer" class="text-center">
+          <img [src]="url" alt="Imagen cargada" class="img-fluid rounded shadow-sm" />
+        </div>
+      }
+    </div>
+  </div>
   <div class="datatable-filter">
     <input
       type="text"

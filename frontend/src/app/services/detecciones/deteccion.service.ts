@@ -6,6 +6,24 @@ import { firstValueFrom } from 'rxjs';
   providedIn: 'root'
 })
 export class DeteccionService {
+  public getImagenDia= async (proyecto: string, dia: string): Promise<string> => {
+    const headers = this.getHeaders();
+    const url = `${this.apiUrl}/imagen/${proyecto}/${dia}`;
+    
+    try {
+      const response = await firstValueFrom(
+        this.http.get(url, { 
+          headers, 
+          responseType: 'text' 
+        })
+      );
+      return response;
+    } catch (error) {
+      console.error('Error al obtener la imagen:', error);
+      throw error;
+    }
+  }
+  
   private apiUrl = 'http://localhost:8080/detecciones';  // Cambia esto a la URL correcta si es diferente
 
   constructor(private http: HttpClient) { }
