@@ -1,22 +1,24 @@
-import { CommonModule } from '@angular/common';
-import { ColumnMode, DatatableComponent, NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Component, inject, ViewChild } from '@angular/core';
-import { FormArray, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectService } from '../services/projectsServices/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormProjectService } from '../services/form/form-project.service';
+import { FormArray, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RestriccionService } from '../services/restricciones/restriccion.service';
+import { ColumnMode, DatatableComponent, NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { CommonModule } from '@angular/common';
+
 @Component({
-  selector: 'app-detalle-proyectos',
+  selector: 'app-detalle-comprobaciones',
   standalone: true,
   imports: [FormsModule,CommonModule,ReactiveFormsModule,NgxDatatableModule],
-  templateUrl: './detalle-proyectos.component.html',
-  styleUrl: './detalle-proyectos.component.css'
+  templateUrl: './detalle-comprobaciones.component.html',
+  styleUrl: './detalle-comprobaciones.component.css'
 })
-export class DetalleProyectosComponent {
-navigateToRestrict() {
+export class DetalleComprobacionesComponent {
+navigateToParent() {
   const currentUrl = this.router.url;
-  this.router.navigate([`${currentUrl}/restrict`]);
+  const parentUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
+  this.router.navigate([parentUrl]);
 }
   filteredRestricciones: any;
   async edit() {
@@ -79,11 +81,6 @@ editarRestriccion(arg0: any) {
 }
   @ViewChild(DatatableComponent) table!: DatatableComponent;
   ColumnMode = ColumnMode;
-  columns = [
-    { prop: 'fechaCreacion', name: 'Día' },
-    { prop: 'cantidad', name: 'Cantidad' },
-    { prop: 'fechaCreacion', name: 'Detalles' }
-  ];
     columns2=[
       { prop: 'idRestriccion', name: 'ID comprobacion' },
       { prop: 'objeto', name: 'Objeto a comprobar' },
@@ -96,20 +93,7 @@ editarRestriccion(arg0: any) {
       
       
     ];
-  updateFilter(event: any) {
-    const val = event.target.value.toLowerCase();
-
-    // filter our data
-    const temp = this.detecciones.filter(function (d: { fechaCreacion: string; cantidad: { toString: () => string; }; }) {
-      return d.fechaCreacion.toLowerCase().indexOf(val) !== -1 ||
-             d.cantidad.toString().toLowerCase().indexOf(val) !== -1 ||
-             false;
-    });
-    
-
-    // update the rows
-    this.filteredDetecciones = temp;
-  }
+  
   updateFilter2(event: any) {
     const val = event.target.value.toLowerCase();
   
@@ -141,8 +125,7 @@ editarRestriccion(arg0: any) {
     this.router.navigate([`${currentUrl}/detect`]);
   }
 
-      detecciones: any=[]
-      filteredDetecciones: any=[]
+      
       restricciones: any=[]
       proyectoId: string | null = null;
       formService=inject(FormProjectService);
@@ -189,27 +172,10 @@ editarRestriccion(arg0: any) {
       }
       load=async()=>{
         this.proyectoId = this.route.snapshot.paramMap.get('id');
-        const res= await this.projectService.getDetecciones(this.proyectoId);
-        if(res){
-          this.detecciones=res;
-          this.filteredDetecciones=this.detecciones;
-          
-        }
         const res2= await this.projectService.getRestricciones(this.proyectoId);
         if(res2){
           this.restricciones=res2;
           this.filteredRestricciones=this.restricciones;
         }
       }
-
-  }
-  export interface Restriccion{
-    objeto:string,
-      fechaDesde: string,
-      fechaHasta: string,
-      cantidadMin:number,
-      cantidadMax: number,
-      proyectoId:number,
-      diaria:boolean
-  }
-  
+}

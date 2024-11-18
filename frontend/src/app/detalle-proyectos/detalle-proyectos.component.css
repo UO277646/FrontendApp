@@ -14,10 +14,14 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
 .datatable-header-cell-label{
   font-size: 30px !important;
 }
-
+.botones{
+  display: flex;
+  justify-content: space-between;
+}
 h3 {
   color: #2c3e50;
   border-bottom: 3px solid #3498db;
@@ -111,7 +115,11 @@ h3 {
   color: #333;
   font-size: 15px;
 }
+.boton{
+  width: fit-content;
+}
 .btn-custom-gray {
+  
   color: #ffffff; /* Blanco para texto */
   background-color: #4b5563; /* Gris oscuro neutro */
   border-color: #374151; /* Gris más oscuro */
