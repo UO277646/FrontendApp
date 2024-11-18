@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FallosService } from '../services/fallos/fallos.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-fallos',
@@ -10,12 +10,17 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './fallos.component.css'
 })
 export class FallosComponent {
+  navigateToParent() {
+    const currentUrl = this.router.url;
+    const parentUrl = currentUrl.replace(/\/fallos\/.*$/, '');
+    this.router.navigate([parentUrl+"/restrict"]);
+  }
   async deleteFallo(arg0: any) {
     await this.fallosService.deleteFallo(arg0);
     this.loadFallos();
 
 }
-  constructor(private route: ActivatedRoute){
+  constructor(private route: ActivatedRoute,private router: Router){
 
   }
 fallos: any;

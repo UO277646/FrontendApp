@@ -13,6 +13,11 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrl: './detalle-deteccion.component.css'
 })
 export class DetalleDeteccionComponent {
+navigateToParent() {
+  const currentUrl = this.router.url;
+  const parentUrl = currentUrl.replace(/\/detections\/.*$/, '');
+  this.router.navigate([parentUrl]);
+}
   @ViewChild(DatatableComponent) table!: DatatableComponent;
   ColumnMode = ColumnMode;
   columns = [
