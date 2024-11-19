@@ -35,17 +35,25 @@ export class ProjectService {
     return response;
   };
   public createProject=async(nombreParam:any)=> {
-    
-    const response=await firstValueFrom(this.http.post(this.apiUrl+"/create",nombreParam))
+    const headers = new HttpHeaders({
+      'ngrok-skip-browser-warning': 'true',
+    });
+    const response=await firstValueFrom(this.http.post(this.apiUrl+"/create",nombreParam, { headers }))
     return response;
   }
 
   public getDetecciones=async(idProyecto:any)=> {
-    const response=await firstValueFrom(this.http.get(this.apiUrl+"/find/detecciones/"+idProyecto))
+    const headers = new HttpHeaders({
+      'ngrok-skip-browser-warning': 'true',
+    });
+    const response=await firstValueFrom(this.http.get(this.apiUrl+"/find/detecciones/"+idProyecto, { headers }))
     return response;
   }
   public getRestricciones=async(idProyecto:any)=> {
-    const response=await firstValueFrom(this.http.get(this.apiUrl+"/find/restricciones/"+idProyecto))
+    const headers = new HttpHeaders({
+      'ngrok-skip-browser-warning': 'true',
+    });
+    const response=await firstValueFrom(this.http.get(this.apiUrl+"/find/restricciones/"+idProyecto, { headers }))
     return response;
   }
   
