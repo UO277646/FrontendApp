@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, firstValueFrom } from 'rxjs';
 
@@ -22,11 +22,18 @@ export class ProjectService {
 
   
 
-  public getProjects=async(email:string,nombre:string)=> {
-    const response=await firstValueFrom(this.http.get(this.apiUrl+"/find/proyectos/"+email+"/"+nombre))
+  
+  public getProjects = async (email: string, nombre: string) => {
+    const headers = new HttpHeaders({
+      'ngrok-skip-browser-warning': 'true',
+    });
+  
+    const response = await firstValueFrom(
+      this.http.get(this.apiUrl+"/find/proyectos/"+email+"/"+nombre, { headers })
+    );
+  
     return response;
-  }
-
+  };
   public createProject=async(nombreParam:any)=> {
     
     const response=await firstValueFrom(this.http.post(this.apiUrl+"/create",nombreParam))

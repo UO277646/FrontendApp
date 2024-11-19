@@ -5,7 +5,7 @@ import { ProyectosScrollableComponent } from "../proyectos-scrollable/proyectos-
 @Component({
   selector: 'app-proyectos-pag',
   standalone: true,
-  imports: [HeaderComponent, ProyectosScrollableComponent],
+  imports: [ ProyectosScrollableComponent],
   templateUrl: './proyectos-pag.component.html',
   styleUrl: './proyectos-pag.component.css'
 })
