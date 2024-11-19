@@ -7,7 +7,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class ValidatorService {
   
-  private apiUrl = 'http://localhost:8080/auth'; 
+  private apiUrl = 'https://764c-156-35-95-17.ngrok-free.app/auth'; 
   constructor(private http:HttpClient) { 
      // Cambia esto a la URL correcta si es diferente
 

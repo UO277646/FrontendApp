@@ -19,9 +19,9 @@ export class UploadService {
 
   constructor(private http:HttpClient) { }
   
-  private apiUrl = 'http://localhost:8080/detect';  // Cambia esto a la URL correcta si es diferente
+  private apiUrl = 'https://764c-156-35-95-17.ngrok-free.app/detect';  // Cambia esto a la URL correcta si es diferente
 
-  private apiPdf = 'http://localhost:8080/generate/'; 
+  private apiPdf = 'https://764c-156-35-95-17.ngrok-free.app/generate/'; 
 
   public getDetectionResults=async(foto:any)=> {
     const response:ObjetoImagenResponse=await firstValueFrom(this.http.post<ObjetoImagenResponse>(this.apiUrl,foto));

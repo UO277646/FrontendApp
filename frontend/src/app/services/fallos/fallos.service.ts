@@ -10,7 +10,7 @@ export class FallosService {
     const response=await firstValueFrom(this.http.delete(this.apiUrl+"/delete/"+idRec))
     return response;
   }
-  private apiUrl = 'http://localhost:8080/fallos';
+  private apiUrl = 'https://764c-156-35-95-17.ngrok-free.app/fallos';
   public getFallos=async(idRec: any)=> {
     const response=await firstValueFrom(this.http.get(this.apiUrl+"/find/fallos/"+idRec))
     return response;

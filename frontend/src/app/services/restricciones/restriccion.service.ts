@@ -12,7 +12,7 @@ export class RestriccionService {
   }
 
   constructor(private http:HttpClient) { }
-  private apiUrl = 'http://localhost:8080/restricciones';  // Cambia esto a la URL correcta si es diferente
+  private apiUrl = 'https://764c-156-35-95-17.ngrok-free.app/restricciones';  // Cambia esto a la URL correcta si es diferente
   public createRestriccion=async(dto:any)=> {
     
     const response=await firstValueFrom(this.http.post(this.apiUrl+"/create",dto))

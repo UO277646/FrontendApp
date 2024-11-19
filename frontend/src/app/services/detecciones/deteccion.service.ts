@@ -24,7 +24,7 @@ export class DeteccionService {
     }
   }
   
-  private apiUrl = 'http://localhost:8080/detecciones';  // Cambia esto a la URL correcta si es diferente
+  private apiUrl = 'https://764c-156-35-95-17.ngrok-free.app/detecciones';  // Cambia esto a la URL correcta si es diferente
 
   constructor(private http: HttpClient) { }
 
