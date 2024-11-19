@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, firstValueFrom } from 'rxjs';
 import { ObjetoImagenResponse } from '../file-upload/file-upload.component';
@@ -24,7 +24,10 @@ export class UploadService {
   private apiPdf = 'https://764c-156-35-95-17.ngrok-free.app/generate/'; 
 
   public getDetectionResults=async(foto:any)=> {
-    const response:ObjetoImagenResponse=await firstValueFrom(this.http.post<ObjetoImagenResponse>(this.apiUrl,foto));
+    const headers = new HttpHeaders({
+      'ngrok-skip-browser-warning': 'true',
+    });
+    const response:ObjetoImagenResponse=await firstValueFrom(this.http.post<ObjetoImagenResponse>(this.apiUrl,foto,{ headers }));
     return response;
   }
   

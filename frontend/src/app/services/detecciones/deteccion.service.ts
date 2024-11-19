@@ -31,11 +31,14 @@ export class DeteccionService {
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');
     return new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,'ngrok-skip-browser-warning': 'true',
     });
   }
   deleteDeteccion= async(idRec: any)=> {
-    const response=await firstValueFrom(this.http.delete(this.apiUrl+"/delete/"+idRec))
+    const headers = new HttpHeaders({
+      'ngrok-skip-browser-warning': 'true',
+    });
+    const response=await firstValueFrom(this.http.delete(this.apiUrl+"/delete/"+idRec,{ headers }))
     return response;
   }
   public getDeteccionesDia = async (proyecto: string, dia: string): Promise<any> => {
