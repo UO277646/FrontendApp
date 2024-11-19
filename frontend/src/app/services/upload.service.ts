@@ -8,9 +8,11 @@ import { ObjetoImagenResponse } from '../file-upload/file-upload.component';
 })
 export class UploadService {
   getProcedurePDF=async(arg0: any)=> {
-    
+    const headers = new HttpHeaders({
+      'ngrok-skip-browser-warning': 'true',
+    });
     const response = await firstValueFrom(
-      this.http.get(this.apiPdf + arg0, { responseType: 'arraybuffer' }) // Especifica 'arraybuffer' para manejar binarios
+      this.http.get(this.apiPdf + arg0, { responseType: 'arraybuffer' ,headers }) // Especifica 'arraybuffer' para manejar binarios
     );
     console.log(response);
     return response;
