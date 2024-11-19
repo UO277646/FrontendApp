@@ -62,12 +62,26 @@ navigateToParent() {
     this.proyectoId = this.route.snapshot.paramMap.get('id');
     this.fecha = this.route.snapshot.paramMap.get('fecha');
 
-    const res= await this.deteccionService.getDeteccionesDia(this.proyectoId,this.fecha);
-    const base64Image = await this.deteccionService.getImagenDia(this.proyectoId, this.fecha);
-    this.url = 'data:image/png;base64,' + base64Image;
-    if(res){
-      this.detecciones=res;
-      this.filteredDetecciones=this.detecciones;
+    try {
+      // Fetch detections
+      const res = await this.deteccionService.getDeteccionesDia(this.proyectoId, this.fecha);
+      if (res) {
+        this.detecciones = res;
+        this.filteredDetecciones = this.detecciones;
+      }
+  
+      // Fetch image separately
+      try {
+        const base64Image = await this.deteccionService.getImagenDia(this.proyectoId, this.fecha);
+        this.url = 'data:image/png;base64,' + base64Image;
+      } catch (imageError) {
+        console.error('Error fetching image:', imageError);
+        // You can set a default image or handle the error as needed
+        this.url = 'path/to/default/image.png';
+      }
+    } catch (error) {
+      console.error('Error fetching detections:', error);
+      // Handle the error for detections fetch
     }
   }
 }
