@@ -4,6 +4,7 @@ import { AuthService } from "../services/auth/auth.service";
 import { ValidatorService } from "../services/validator/validator.service";
 
 export const auth: CanActivateFn=async (route,state)=>{
+    
     const validator=inject(ValidatorService);
     const email=JSON.parse(sessionStorage.getItem("loggedInUser")!).email;
     const proyectId = route.params['id'];

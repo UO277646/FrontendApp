@@ -30,7 +30,7 @@ export class AppComponent {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
-      if(this.router.url=="/"){
+      if(this.router.url=="/" || this.router.url==""){
         this.showHeader = false;
       }else{
         this.showHeader = true;
